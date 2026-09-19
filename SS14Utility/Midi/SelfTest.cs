@@ -1,12 +1,12 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace SS14MidiPlayer;
+namespace SS14Utility.Midi;
 
 /// <summary>
 ///     Headless smoke test: boots the synth exactly like the UI does, plays a file for a few seconds and
 ///     writes what happened to a log file. Run with:
-///     SS14MidiPlayer.exe --selftest [midi file] [instrument id] [seconds] [--limits]
+///     SS14Utility.exe --selftest [midi file] [instrument id] [seconds] [--limits]
 /// </summary>
 public static class SelfTest
 {

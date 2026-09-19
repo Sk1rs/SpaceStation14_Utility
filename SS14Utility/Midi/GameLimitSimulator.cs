@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace SS14MidiPlayer;
+namespace SS14Utility.Midi;
 
 public enum LimitStatus
 {

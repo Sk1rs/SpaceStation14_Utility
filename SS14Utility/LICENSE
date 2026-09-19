@@ -22,7 +22,9 @@ SOFTWARE.
 
 ---
 
-This license covers the C# source of this player only. The files under
-Assets/instruments.json, Assets/programs.json, and soundfonts/space-station-14.sf2
-are extracted from the dead-space-server/space-station-14-soyuz game build and
-remain subject to that project's own asset licensing — see README.md for details.
+This license covers the C# source of this program (both the MIDI player and the image-to-text
+tool, the latter a C# port of Tunguso4ka's SSfyImage, originally released under the Unlicense).
+
+The files under Assets/instruments.json, Assets/programs.json, and soundfonts/space-station-14.sf2
+are extracted from the dead-space-server/space-station-14-soyuz game build and remain subject to
+that project's own asset licensing — see README.md for details.

@@ -9,8 +9,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AssemblyName>SS14MidiPlayer</AssemblyName>
-    <RootNamespace>SS14MidiPlayer</RootNamespace>
+    <AssemblyName>SS14Utility</AssemblyName>
+    <RootNamespace>SS14Utility</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>

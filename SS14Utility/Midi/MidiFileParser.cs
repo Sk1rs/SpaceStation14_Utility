@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace SS14MidiPlayer;
+namespace SS14Utility.Midi;
 
 /// <summary>
 ///     Track info as the game extracts it for its channel list.

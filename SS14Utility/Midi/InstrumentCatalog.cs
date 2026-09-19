@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SS14MidiPlayer;
+namespace SS14Utility.Midi;
 
 /// <summary>
 ///     One instrument prototype from the game, as defined by its Instrument component.

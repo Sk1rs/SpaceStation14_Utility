@@ -1,7 +1,7 @@
 using NFluidsynth;
 using MidiEvent = NFluidsynth.MidiEvent;
 
-namespace SS14MidiPlayer;
+namespace SS14Utility.Midi;
 
 public enum MidiCommand : byte
 {

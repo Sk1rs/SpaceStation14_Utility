@@ -1,8 +1,6 @@
-using System.ComponentModel;
+namespace SS14Utility.Midi;
 
-namespace SS14MidiPlayer;
-
-public sealed class MainForm : Form
+public sealed class MidiPlayerPanel : UserControl
 {
     private static readonly Color BgColor = Color.FromArgb(28, 30, 36);
     private static readonly Color PanelColor = Color.FromArgb(37, 40, 48);
@@ -62,12 +60,10 @@ public sealed class MainForm : Form
     private bool _seeking;
     private string? _currentFile;
 
-    public MainForm()
+    public MidiPlayerPanel()
     {
-        Text = "SS14 MIDI плеер";
+        Dock = DockStyle.Fill;
         MinimumSize = new Size(1000, 660);
-        Size = new Size(1240, 780);
-        StartPosition = FormStartPosition.CenterScreen;
         BackColor = BgColor;
         ForeColor = FgColor;
         Font = new Font("Segoe UI", 9f);
@@ -80,8 +76,10 @@ public sealed class MainForm : Form
         DragDrop += OnDragDrop;
 
         Load += OnFormLoad;
-        FormClosing += OnFormClosing;
     }
+
+    /// <summary>Called by the host form on exit, since a UserControl has no FormClosing of its own.</summary>
+    public void Shutdown() => OnFormClosing();
 
     #region UI construction
 
@@ -116,12 +114,14 @@ public sealed class MainForm : Form
         right.Controls.Add(BuildChannels());
         right.Controls.Add(BuildLogic());
 
-        Shown += (_, _) =>
+        // A UserControl has no Shown event, so defer past the current message-loop tick with
+        // BeginInvoke instead - by then the host form has finished laying out the docked panel
+        // and the splitters have their real width, same as Shown would have guaranteed on a Form.
+        HandleCreated += (_, _) => BeginInvoke(new Action(() =>
         {
-            // Min sizes and the distance are only valid once the splitters have their real width.
             SetupSplitter(outerSplit, 200, 320, 320);
             SetupSplitter(innerSplit, 200, 320, 330);
-        };
+        }));
     }
 
     private static void SetupSplitter(SplitContainer split, int panel1Min, int panel2Min, int distance)
@@ -691,7 +691,7 @@ public sealed class MainForm : Form
         _uiTimer.Start();
     }
 
-    private void OnFormClosing(object? sender, CancelEventArgs e)
+    private void OnFormClosing()
     {
         _uiTimer.Stop();
 

@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace SS14MidiPlayer;
+namespace SS14Utility.Midi;
 
 public static class Paths
 {

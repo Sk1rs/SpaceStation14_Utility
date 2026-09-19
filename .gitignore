@@ -1,16 +1,9 @@
-# Python (SS14fyImage)
-__pycache__/
-*.pyc
-build/
-dist/
-*.spec.bak
-
-# .NET (SS14MidiPlayer)
+# .NET build output
 bin/
 obj/
 *.user
 
-# Reference clones used only by SS14MidiPlayer/tools/extract_*.py
+# Reference clones used only by SS14Utility/tools/extract_*.py
 repo/
 rt/
 

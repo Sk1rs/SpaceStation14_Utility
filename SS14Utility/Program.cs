@@ -1,4 +1,7 @@
-namespace SS14MidiPlayer;
+using SS14Utility.ImageTool;
+using SS14Utility.Midi;
+
+namespace SS14Utility;
 
 internal static class Program
 {
@@ -11,11 +14,16 @@ internal static class Program
         AppDomain.CurrentDomain.UnhandledException += (_, e) =>
         {
             MessageBox.Show("Непредвиденная ошибка:" + Environment.NewLine + e.ExceptionObject,
-                "SS14 MIDI плеер", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                "SS14 Utility", MessageBoxButtons.OK, MessageBoxIcon.Error);
         };
 
         ApplicationConfiguration.Initialize();
-        Application.Run(new MainForm());
+
+        using (var disclaimer = new DisclaimerDialog())
+            if (disclaimer.ShowDialog() != DialogResult.OK)
+                return 0;
+
+        Application.Run(new AppMainForm());
         return 0;
     }
 }
