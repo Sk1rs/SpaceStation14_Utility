@@ -1,0 +1,22 @@
+# Python (SS14fyImage)
+__pycache__/
+*.pyc
+build/
+dist/
+*.spec.bak
+
+# .NET (SS14MidiPlayer)
+bin/
+obj/
+*.user
+
+# Reference clones used only by SS14MidiPlayer/tools/extract_*.py
+repo/
+rt/
+
+# OS / editor cruft
+.vs/
+.vscode/
+*.swp
+Thumbs.db
+.DS_Store

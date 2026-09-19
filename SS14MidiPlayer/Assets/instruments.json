@@ -1,0 +1,1099 @@
+[
+  {
+    "id": "ClothingMultipleHeadphones",
+    "name": "headphones",
+    "nameRu": "наушники",
+    "program": 0,
+    "bank": 0,
+    "allowPercussion": true,
+    "allowProgramChange": true,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Clothing/Multiple/misc.yml"
+  },
+  {
+    "id": "DawInstrument",
+    "name": "digital audio workstation",
+    "nameRu": "цифровая звуковая рабочая станция",
+    "program": 0,
+    "bank": 0,
+    "allowPercussion": true,
+    "allowProgramChange": true,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "SuperSynthesizerInstrument",
+    "name": "super synthesizer",
+    "nameRu": "суперсинтезатор",
+    "program": 0,
+    "bank": 0,
+    "allowPercussion": true,
+    "allowProgramChange": true,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instrument_keyed.yml"
+  },
+  {
+    "id": "SuperSynthesizerNoLimitInstrument",
+    "name": "super synthesizer",
+    "nameRu": "{ ent-SuperSynthesizerInstrument }",
+    "program": 0,
+    "bank": 0,
+    "allowPercussion": true,
+    "allowProgramChange": true,
+    "respectMidiLimits": false,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instrument_keyed.yml"
+  },
+  {
+    "id": "BikeHornInstrument",
+    "name": "gilded bike horn",
+    "nameRu": "позолоченный велосипедный клаксон",
+    "program": 1,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_misc.yml"
+  },
+  {
+    "id": "PDAPrometheus3",
+    "name": "кроваво-красный КПК",
+    "nameRu": null,
+    "program": 1,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/_DeadSpace/Sponsor/prometheus3.yml"
+  },
+  {
+    "id": "PianoInstrument",
+    "name": "piano",
+    "nameRu": "рояль",
+    "program": 1,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "GoldenPersonalAI",
+    "name": "golden personal ai device",
+    "nameRu": "золотой персональный ИИ",
+    "program": 2,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/pai.yml"
+  },
+  {
+    "id": "MusicianPDA",
+    "name": "musician PDA",
+    "nameRu": "КПК музыканта",
+    "program": 2,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": true,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Devices/pda.yml"
+  },
+  {
+    "id": "PDAPrometheusAlt",
+    "name": "кроваво-красный КПК",
+    "nameRu": null,
+    "program": 2,
+    "bank": 1,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": true,
+    "styles": null,
+    "file": "Resources/Prototypes/_DeadSpace/Sponsor/prometheusAlt.yml"
+  },
+  {
+    "id": "PersonalAI",
+    "name": "personal ai device",
+    "nameRu": "персональный ИИ",
+    "program": 2,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/pai.yml"
+  },
+  {
+    "id": "PersonalNecoAI",
+    "name": "персональный ИИ кошкогорничная",
+    "nameRu": "персональный ИИ кошкогорничная",
+    "program": 2,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/_DeadSpace/Entities/Objects/Fun/pai-neco.yml"
+  },
+  {
+    "id": "PotatoAI",
+    "name": "potato artificial intelligence",
+    "nameRu": "картофельный ИИ",
+    "program": 2,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/pai.yml"
+  },
+  {
+    "id": "SyndicatePersonalAI",
+    "name": "syndicate personal ai device",
+    "nameRu": "персональный ИИ",
+    "program": 2,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/pai.yml"
+  },
+  {
+    "id": "SyndicatePersonalNecoAI",
+    "name": "персональный ИИ кошкогорничная",
+    "nameRu": "персональный ИИ кошкогорничная",
+    "program": 2,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/_DeadSpace/Entities/Objects/Fun/pai-neco.yml"
+  },
+  {
+    "id": "VisitorMusicianPDA",
+    "name": "musician PDA",
+    "nameRu": "{ ent-MusicianPDA }",
+    "program": 2,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": true,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Devices/pda.yml"
+  },
+  {
+    "id": "EuphoniumInstrument",
+    "name": "euphonium",
+    "nameRu": "эуфониум",
+    "program": 3,
+    "bank": 100,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_brass.yml"
+  },
+  {
+    "id": "UprightPianoInstrument",
+    "name": "upright piano",
+    "nameRu": "пианино",
+    "program": 3,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "GlockenspielInstrument",
+    "name": "glockenspiel",
+    "nameRu": "глокеншпиль",
+    "program": 9,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_percussion.yml"
+  },
+  {
+    "id": "MusicBoxInstrument",
+    "name": "music box",
+    "nameRu": "музыкальная шкатулка",
+    "program": 10,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_percussion.yml"
+  },
+  {
+    "id": "VibraphoneInstrument",
+    "name": "vibraphone",
+    "nameRu": "вибрафон",
+    "program": 11,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "MarimbaInstrument",
+    "name": "marimba",
+    "nameRu": "маримба",
+    "program": 12,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "MobSkeletonBiker",
+    "name": "skeleton biker",
+    "nameRu": "скелет-байкер",
+    "program": 13,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Mobs/Player/skeleton.yml"
+  },
+  {
+    "id": "MobSkeletonCloset",
+    "name": "closet skeleton",
+    "nameRu": "скелет из шкафа",
+    "program": 13,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Mobs/Player/skeleton.yml"
+  },
+  {
+    "id": "MobSkeletonPerson",
+    "name": "Urist McSkelly",
+    "nameRu": "{ ent-BaseMobSkeletonPerson }",
+    "program": 13,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Mobs/Player/skeleton.yml"
+  },
+  {
+    "id": "MobSkeletonPirate",
+    "name": "skeleton pirate",
+    "nameRu": "скелет-пират",
+    "program": 13,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Mobs/Player/skeleton.yml"
+  },
+  {
+    "id": "XylophoneInstrument",
+    "name": "xylophone",
+    "nameRu": "ксилофон",
+    "program": 13,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_percussion.yml"
+  },
+  {
+    "id": "ChurchOrganInstrument",
+    "name": "church organ",
+    "nameRu": "церковный орган",
+    "program": 19,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "AccordionInstrument",
+    "name": "accordion",
+    "nameRu": "аккордеон",
+    "program": 21,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Standard",
+        "program": 21,
+        "bank": 0
+      },
+      {
+        "name": "Tango",
+        "program": 23,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instrument_keyed.yml"
+  },
+  {
+    "id": "HarmonicaInstrument",
+    "name": "harmonica",
+    "nameRu": "губная гармошка",
+    "program": 22,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_wind.yml"
+  },
+  {
+    "id": "AcousticGuitarInstrument",
+    "name": "acoustic guitar",
+    "nameRu": "акустическая гитара",
+    "program": 24,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Nylon",
+        "program": 24,
+        "bank": 0
+      },
+      {
+        "name": "Steel",
+        "program": 25,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "ElectricGuitarInstrument",
+    "name": "electric guitar",
+    "nameRu": "электрогитара",
+    "program": 27,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Clean",
+        "program": 27,
+        "bank": 0
+      },
+      {
+        "name": "Jazz",
+        "program": 26,
+        "bank": 0
+      },
+      {
+        "name": "Muted",
+        "program": 28,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "DoubleRockGuitarInstrument",
+    "name": "рок-гитара с двойным грифом",
+    "nameRu": null,
+    "program": 29,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Overdrive",
+        "program": 29,
+        "bank": 0
+      },
+      {
+        "name": "Distortion",
+        "program": 30,
+        "bank": 0
+      },
+      {
+        "name": "Harmonics",
+        "program": 31,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/_DeadSpace/Entities/Objects/Fun/instruments.yml"
+  },
+  {
+    "id": "RockGuitarInstrument",
+    "name": "rock guitar",
+    "nameRu": "рок-гитара",
+    "program": 29,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Overdrive",
+        "program": 29,
+        "bank": 0
+      },
+      {
+        "name": "Distortion",
+        "program": 30,
+        "bank": 0
+      },
+      {
+        "name": "Harmonics",
+        "program": 31,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "RockGuitarPrometheus3",
+    "name": "рок-гитара с двумя грифами",
+    "nameRu": null,
+    "program": 29,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Overdrive",
+        "program": 29,
+        "bank": 0
+      },
+      {
+        "name": "Distortion",
+        "program": 30,
+        "bank": 0
+      },
+      {
+        "name": "Harmonics",
+        "program": 31,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/_DeadSpace/Sponsor/prometheus3.yml"
+  },
+  {
+    "id": "BassGuitarInstrument",
+    "name": "bass guitar",
+    "nameRu": "бас-гитара",
+    "program": 33,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Fingered",
+        "program": 33,
+        "bank": 0
+      },
+      {
+        "name": "Pick",
+        "program": 34,
+        "bank": 0
+      },
+      {
+        "name": "Slap",
+        "program": 36,
+        "bank": 0
+      },
+      {
+        "name": "Slap (XTra Funky)",
+        "program": 37,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "ViolinInstrument",
+    "name": "violin",
+    "nameRu": "скрипка",
+    "program": 40,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Classical",
+        "program": 40,
+        "bank": 0
+      },
+      {
+        "name": "Bluegrass",
+        "program": 110,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "ViolaInstrument",
+    "name": "viola",
+    "nameRu": "виола",
+    "program": 41,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "CelloInstrument",
+    "name": "cello",
+    "nameRu": "виолончель",
+    "program": 42,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "ContrabassInstrument",
+    "name": "contrabass",
+    "nameRu": "контрабас",
+    "program": 43,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "HarpInstrument",
+    "name": "harp",
+    "nameRu": "арфа",
+    "program": 46,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "TimpaniInstrument",
+    "name": "timpani",
+    "nameRu": "литавры",
+    "program": 47,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "MicrophoneInstrument",
+    "name": "microphone",
+    "nameRu": "микрофон",
+    "program": 52,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Aah",
+        "program": 52,
+        "bank": 0
+      },
+      {
+        "name": "Ooh",
+        "program": 53,
+        "bank": 0
+      },
+      {
+        "name": "Kweh",
+        "program": 4,
+        "bank": 100
+      },
+      {
+        "name": "Waa",
+        "program": 5,
+        "bank": 100
+      },
+      {
+        "name": "Wah",
+        "program": 6,
+        "bank": 100
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_percussion.yml"
+  },
+  {
+    "id": "FoodSpacemansTrumpet",
+    "name": "spaceman's trumpet",
+    "nameRu": "космонавтская труба",
+    "program": 56,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Consumable/Food/produce.yml"
+  },
+  {
+    "id": "TrumpetInstrument",
+    "name": "trumpet",
+    "nameRu": "труба",
+    "program": 56,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Standard",
+        "program": 56,
+        "bank": 0
+      },
+      {
+        "name": "Muted",
+        "program": 59,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_brass.yml"
+  },
+  {
+    "id": "TromboneInstrument",
+    "name": "trombone",
+    "nameRu": "тромбон",
+    "program": 57,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_brass.yml"
+  },
+  {
+    "id": "TubaInstrument",
+    "name": "tuba",
+    "nameRu": "туба",
+    "program": 58,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "FrenchHornInstrument",
+    "name": "french horn",
+    "nameRu": "валторна",
+    "program": 60,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_brass.yml"
+  },
+  {
+    "id": "SynthesizerInstrument",
+    "name": "synthesizer",
+    "nameRu": "синтезатор",
+    "program": 62,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Electro",
+        "program": 62,
+        "bank": 0
+      },
+      {
+        "name": "Bubbles",
+        "program": 63,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instrument_keyed.yml"
+  },
+  {
+    "id": "SaxophoneInstrument",
+    "name": "saxophone",
+    "nameRu": "саксофон",
+    "program": 66,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": [
+      {
+        "name": "Soprano",
+        "program": 64,
+        "bank": 0
+      },
+      {
+        "name": "Alto",
+        "program": 65,
+        "bank": 0
+      },
+      {
+        "name": "Tenor",
+        "program": 66,
+        "bank": 0
+      },
+      {
+        "name": "Baritone",
+        "program": 67,
+        "bank": 0
+      }
+    ],
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_wind.yml"
+  },
+  {
+    "id": "ClarinetInstrument",
+    "name": "clarinet",
+    "nameRu": "кларнет",
+    "program": 71,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_wind.yml"
+  },
+  {
+    "id": "FluteInstrument",
+    "name": "flute",
+    "nameRu": "флейта",
+    "program": 73,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_wind.yml"
+  },
+  {
+    "id": "RecorderInstrument",
+    "name": "recorder",
+    "nameRu": "блокфлейта",
+    "program": 74,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_wind.yml"
+  },
+  {
+    "id": "PanFluteInstrument",
+    "name": "pan flute",
+    "nameRu": "флейта Пана",
+    "program": 75,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_wind.yml"
+  },
+  {
+    "id": "OcarinaInstrument",
+    "name": "ocarina",
+    "nameRu": "окарина",
+    "program": 79,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_wind.yml"
+  },
+  {
+    "id": "MinimoogInstrument",
+    "name": "minimoog",
+    "nameRu": "минимуг",
+    "program": 81,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "BanjoInstrument",
+    "name": "banjo",
+    "nameRu": "банджо",
+    "program": 105,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "KalimbaInstrument",
+    "name": "kalimba",
+    "nameRu": "калимба",
+    "program": 108,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instrument_keyed.yml"
+  },
+  {
+    "id": "BagpipeInstrument",
+    "name": "bagpipe",
+    "nameRu": "волынка",
+    "program": 109,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_wind.yml"
+  },
+  {
+    "id": "WoodblockInstrument",
+    "name": "woodblock",
+    "nameRu": "коробочка",
+    "program": 115,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_percussion.yml"
+  },
+  {
+    "id": "TaikoInstrument",
+    "name": "taiko",
+    "nameRu": "тайко",
+    "program": 116,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "TomDrumsInstrument",
+    "name": "tom drums",
+    "nameRu": "том-том",
+    "program": 117,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_structures.yml"
+  },
+  {
+    "id": "ReverseCymbalsInstrument",
+    "name": "reverse cymbals",
+    "nameRu": "реверс-цимбалы",
+    "program": 119,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_percussion.yml"
+  },
+  {
+    "id": "GuitarlessFretsInstrument",
+    "name": "guitarless frets",
+    "nameRu": "безгитарные лады",
+    "program": 120,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_string.yml"
+  },
+  {
+    "id": "MusicalLungInstrument",
+    "name": "musical lung",
+    "nameRu": "музыкальное лёгкое",
+    "program": 121,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_misc.yml"
+  },
+  {
+    "id": "SeashellInstrument",
+    "name": "seashell",
+    "nameRu": "ракушка",
+    "program": 122,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_misc.yml"
+  },
+  {
+    "id": "BirdToyInstrument",
+    "name": "bird whistle",
+    "nameRu": "птичий свист",
+    "program": 123,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_misc.yml"
+  },
+  {
+    "id": "HelicopterInstrument",
+    "name": "toy helicopter",
+    "nameRu": "игрушечный вертолёт",
+    "program": 125,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_misc.yml"
+  },
+  {
+    "id": "CannedApplauseInstrument",
+    "name": "canned applause",
+    "nameRu": "готовые аплодисменты",
+    "program": 126,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_misc.yml"
+  },
+  {
+    "id": "GunpetInstrument",
+    "name": "gunpet",
+    "nameRu": "писольлет",
+    "program": 127,
+    "bank": 0,
+    "allowPercussion": false,
+    "allowProgramChange": false,
+    "respectMidiLimits": true,
+    "handheld": false,
+    "styles": null,
+    "file": "Resources/Prototypes/Entities/Objects/Fun/Instruments/instruments_misc.yml"
+  }
+]

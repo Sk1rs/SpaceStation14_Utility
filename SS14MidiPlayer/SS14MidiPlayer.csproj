@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>SS14MidiPlayer</AssemblyName>
+    <RootNamespace>SS14MidiPlayer</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SpaceWizards.NFluidsynth" Version="0.2.2" />
+    <PackageReference Include="Robust.Natives.Fluidsynth" Version="0.2.1-fluidsynth2.4.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets/instruments.json" />
+    <EmbeddedResource Include="Assets/programs.json" />
+    <None Include="soundfonts/**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,770 @@
+[
+  {
+    "program": 0,
+    "key": "acoustic-grand-piano",
+    "en": "Acoustic Grand Piano",
+    "ru": "Акустический рояль"
+  },
+  {
+    "program": 1,
+    "key": "bright-acoustic-piano",
+    "en": "Bright Acoustic Piano",
+    "ru": "Яркое акустическое фортепиано"
+  },
+  {
+    "program": 2,
+    "key": "electric-grand-piano",
+    "en": "Electric Grand Piano",
+    "ru": "Электрический рояль"
+  },
+  {
+    "program": 3,
+    "key": "honky-tonk-piano",
+    "en": "Honky-tonk Piano",
+    "ru": "Фортепиано хонки-тонк"
+  },
+  {
+    "program": 4,
+    "key": "rhodes-piano",
+    "en": "Rhodes Piano",
+    "ru": "Родес-пиано"
+  },
+  {
+    "program": 5,
+    "key": "chorused-piano",
+    "en": "Chorused Piano",
+    "ru": "Фортепиано с хорусом"
+  },
+  {
+    "program": 6,
+    "key": "harpsichord",
+    "en": "Harpsichord",
+    "ru": "Клавесин"
+  },
+  {
+    "program": 7,
+    "key": "clavinet",
+    "en": "Clavinet",
+    "ru": "Клавинет"
+  },
+  {
+    "program": 8,
+    "key": "celesta",
+    "en": "Celesta",
+    "ru": "Целеста"
+  },
+  {
+    "program": 9,
+    "key": "glockenspiel",
+    "en": "Glockenspiel",
+    "ru": "Колокольчики"
+  },
+  {
+    "program": 10,
+    "key": "music-box",
+    "en": "Music Box",
+    "ru": "Музыкальная шкатулка"
+  },
+  {
+    "program": 11,
+    "key": "vibraphone",
+    "en": "Vibraphone",
+    "ru": "Вибрафон"
+  },
+  {
+    "program": 12,
+    "key": "marimba",
+    "en": "Marimba",
+    "ru": "Маримба"
+  },
+  {
+    "program": 13,
+    "key": "xylophone",
+    "en": "Xylophone",
+    "ru": "Ксилофон"
+  },
+  {
+    "program": 14,
+    "key": "tubular-bells",
+    "en": "Tubular Bells",
+    "ru": "Трубные колокола"
+  },
+  {
+    "program": 15,
+    "key": "dulcimer",
+    "en": "Dulcimer",
+    "ru": "Цимбалы"
+  },
+  {
+    "program": 16,
+    "key": "hammond-organ",
+    "en": "Hammond Organ",
+    "ru": "Орган Хаммонда"
+  },
+  {
+    "program": 17,
+    "key": "percussive-organ",
+    "en": "Percussive Organ",
+    "ru": "Перкуссионный орган"
+  },
+  {
+    "program": 18,
+    "key": "rock-organ",
+    "en": "Rock Organ",
+    "ru": "Рок-орган"
+  },
+  {
+    "program": 19,
+    "key": "church-organ",
+    "en": "Church Organ",
+    "ru": "Церковный орган"
+  },
+  {
+    "program": 20,
+    "key": "reed-organ",
+    "en": "Reed Organ",
+    "ru": "Реечный орган"
+  },
+  {
+    "program": 21,
+    "key": "accordion",
+    "en": "Accordion",
+    "ru": "Аккордеон"
+  },
+  {
+    "program": 22,
+    "key": "harmonica",
+    "en": "Harmonica",
+    "ru": "Гармоника"
+  },
+  {
+    "program": 23,
+    "key": "tango-accordion",
+    "en": "Tango Accordion",
+    "ru": "Танго-аккордеон"
+  },
+  {
+    "program": 24,
+    "key": "acoustic-nylon-guitar",
+    "en": "Acoustic Nylon Guitar",
+    "ru": "Акустическая гитара с нейлоновыми струнами"
+  },
+  {
+    "program": 25,
+    "key": "acoustic-steel-guitar",
+    "en": "Acoustic Steel Guitar",
+    "ru": "Акустическая гитара со стальными струнами"
+  },
+  {
+    "program": 26,
+    "key": "electric-jazz-guitar",
+    "en": "Electric Jazz Guitar",
+    "ru": "Электрическая джазовая гитара"
+  },
+  {
+    "program": 27,
+    "key": "electric-clean-guitar",
+    "en": "Electric Clean Guitar",
+    "ru": "Электрическая чистая гитара"
+  },
+  {
+    "program": 28,
+    "key": "electric-muted-guitar",
+    "en": "Electric Muted Guitar",
+    "ru": "Электрическая приглушенная гитара"
+  },
+  {
+    "program": 29,
+    "key": "overdriven-guitar",
+    "en": "Overdriven Guitar",
+    "ru": "Гитара с перегрузом"
+  },
+  {
+    "program": 30,
+    "key": "distortion-guitar",
+    "en": "Distortion Guitar",
+    "ru": "Гитара с дисторшеном"
+  },
+  {
+    "program": 31,
+    "key": "guitar-harmonics",
+    "en": "Guitar Harmonics",
+    "ru": "Гитарные гармоники"
+  },
+  {
+    "program": 32,
+    "key": "acoustic-bass",
+    "en": "Acoustic Bass",
+    "ru": "Акустический бас"
+  },
+  {
+    "program": 33,
+    "key": "fingered-electric-bass",
+    "en": "Fingered Electric Bass",
+    "ru": "Электробас с пальцевой техникой"
+  },
+  {
+    "program": 34,
+    "key": "plucked-electric-bass",
+    "en": "Plucked Electric Bass",
+    "ru": "Электробас с щипковой техникой"
+  },
+  {
+    "program": 35,
+    "key": "fretless-bass",
+    "en": "Fretless Bass",
+    "ru": "Бас без ладов"
+  },
+  {
+    "program": 36,
+    "key": "slap-bass1",
+    "en": "Slap Bass 1",
+    "ru": "Слэп-бас 1"
+  },
+  {
+    "program": 37,
+    "key": "slap-bass2",
+    "en": "Slap Bass 2",
+    "ru": "Слэп-бас 2"
+  },
+  {
+    "program": 38,
+    "key": "synth-bass1",
+    "en": "Synth Bass 1",
+    "ru": "Синтезаторный бас 1"
+  },
+  {
+    "program": 39,
+    "key": "synth-bass2",
+    "en": "Synth Bass 2",
+    "ru": "Синтезаторный бас 2"
+  },
+  {
+    "program": 40,
+    "key": "violin",
+    "en": "Violin",
+    "ru": "Скрипка"
+  },
+  {
+    "program": 41,
+    "key": "viola",
+    "en": "Viola",
+    "ru": "Альт"
+  },
+  {
+    "program": 42,
+    "key": "cello",
+    "en": "Cello",
+    "ru": "Виолончель"
+  },
+  {
+    "program": 43,
+    "key": "contrabass",
+    "en": "Contrabass",
+    "ru": "Контрабас"
+  },
+  {
+    "program": 44,
+    "key": "tremolo-strings",
+    "en": "Tremolo Strings",
+    "ru": "Струнные с тремоло"
+  },
+  {
+    "program": 45,
+    "key": "pizzicato-strings",
+    "en": "Pizzicato Strings",
+    "ru": "Струнные с пиццикато"
+  },
+  {
+    "program": 46,
+    "key": "orchestral-harp",
+    "en": "Orchestral Harp",
+    "ru": "Оркестровая арфа"
+  },
+  {
+    "program": 47,
+    "key": "timpani",
+    "en": "Timpani",
+    "ru": "Литавры"
+  },
+  {
+    "program": 48,
+    "key": "string-ensemble1",
+    "en": "String Ensemble 1",
+    "ru": "Струнный ансамбль 1"
+  },
+  {
+    "program": 49,
+    "key": "string-ensemble2",
+    "en": "String Ensemble 2",
+    "ru": "Струнный ансамбль 2"
+  },
+  {
+    "program": 50,
+    "key": "synth-strings1",
+    "en": "Synth Strings 1",
+    "ru": "Синтезаторные струнные 1"
+  },
+  {
+    "program": 51,
+    "key": "synth-strings2",
+    "en": "Synth Strings 2",
+    "ru": "Синтезаторные струнные 2"
+  },
+  {
+    "program": 52,
+    "key": "choir-aah",
+    "en": "Choir \"Aah\"",
+    "ru": "Хор «Ааа»"
+  },
+  {
+    "program": 53,
+    "key": "voice-ooh",
+    "en": "Voice \"Ooh\"",
+    "ru": "Голос «Ооо»"
+  },
+  {
+    "program": 54,
+    "key": "synth-choir",
+    "en": "Synth Choir",
+    "ru": "Синтезаторный хор"
+  },
+  {
+    "program": 55,
+    "key": "orchestra-hit",
+    "en": "Orchestra Hit",
+    "ru": "Удар оркестра"
+  },
+  {
+    "program": 56,
+    "key": "trumpet",
+    "en": "Trumpet",
+    "ru": "Труба"
+  },
+  {
+    "program": 57,
+    "key": "trombone",
+    "en": "Trombone",
+    "ru": "Тромбон"
+  },
+  {
+    "program": 58,
+    "key": "tuba",
+    "en": "Tuba",
+    "ru": "Туба"
+  },
+  {
+    "program": 59,
+    "key": "muted-trumpet",
+    "en": "Muted Trumpet",
+    "ru": "Приглушенная труба"
+  },
+  {
+    "program": 60,
+    "key": "french-horn",
+    "en": "French Horn",
+    "ru": "Валторна"
+  },
+  {
+    "program": 61,
+    "key": "brass-section",
+    "en": "Brass Section",
+    "ru": "Секция медных духовых"
+  },
+  {
+    "program": 62,
+    "key": "synth-brass1",
+    "en": "Synth Brass 1",
+    "ru": "Синтезатор медных духовых 1"
+  },
+  {
+    "program": 63,
+    "key": "synth-brass2",
+    "en": "Synth Brass 2",
+    "ru": "Синтезаторный медный духовой инструмент 2"
+  },
+  {
+    "program": 64,
+    "key": "soprano-sax",
+    "en": "Soprano Sax",
+    "ru": "Сопрано-саксофон"
+  },
+  {
+    "program": 65,
+    "key": "alto-sax",
+    "en": "Alto Sax",
+    "ru": "Альт-саксофон"
+  },
+  {
+    "program": 66,
+    "key": "tenor-sax",
+    "en": "Tenor Sax",
+    "ru": "Тенор-саксофон"
+  },
+  {
+    "program": 67,
+    "key": "baritone-sax",
+    "en": "Baritone Sax",
+    "ru": "Баритон-саксофон"
+  },
+  {
+    "program": 68,
+    "key": "oboe",
+    "en": "Oboe",
+    "ru": "Гобой"
+  },
+  {
+    "program": 69,
+    "key": "english-horn",
+    "en": "English Horn",
+    "ru": "Английский рожок"
+  },
+  {
+    "program": 70,
+    "key": "bassoon",
+    "en": "Bassoon",
+    "ru": "Фагот"
+  },
+  {
+    "program": 71,
+    "key": "clarinet",
+    "en": "Clarinet",
+    "ru": "Кларнет"
+  },
+  {
+    "program": 72,
+    "key": "piccolo",
+    "en": "Piccolo",
+    "ru": "Пикколо"
+  },
+  {
+    "program": 73,
+    "key": "flute",
+    "en": "Flute",
+    "ru": "Флейта"
+  },
+  {
+    "program": 74,
+    "key": "recorder",
+    "en": "Recorder",
+    "ru": "Флейта-рекордер"
+  },
+  {
+    "program": 75,
+    "key": "pan-flute",
+    "en": "Pan Flute",
+    "ru": "Флейта Пана"
+  },
+  {
+    "program": 76,
+    "key": "bottle-blow",
+    "en": "Bottle Blow",
+    "ru": "Бутылка"
+  },
+  {
+    "program": 77,
+    "key": "shakuhachi",
+    "en": "Shakuhachi",
+    "ru": "Шакухачи"
+  },
+  {
+    "program": 78,
+    "key": "whistle",
+    "en": "Whistle",
+    "ru": "Свисток"
+  },
+  {
+    "program": 79,
+    "key": "ocarina",
+    "en": "Ocarina",
+    "ru": "Окарина"
+  },
+  {
+    "program": 80,
+    "key": "square-wave-lead",
+    "en": "Square Wave Lead",
+    "ru": "Квадратная волна"
+  },
+  {
+    "program": 81,
+    "key": "sawtooth-wave-lead",
+    "en": "Sawtooth Wave Lead",
+    "ru": "Пилообразная волна"
+  },
+  {
+    "program": 82,
+    "key": "calliope-lead",
+    "en": "Calliope Lead",
+    "ru": "Каллиопа"
+  },
+  {
+    "program": 83,
+    "key": "chiff-lead",
+    "en": "Chiff Lead",
+    "ru": "Шифф-лид"
+  },
+  {
+    "program": 84,
+    "key": "charang-lead",
+    "en": "Charang Lead",
+    "ru": "Чаранг-лид"
+  },
+  {
+    "program": 85,
+    "key": "voice-lead",
+    "en": "Voice Lead",
+    "ru": "Голос-лид"
+  },
+  {
+    "program": 86,
+    "key": "fiths-lead",
+    "en": "Fiths Lead",
+    "ru": "Лид Fiths"
+  },
+  {
+    "program": 87,
+    "key": "bass-lead",
+    "en": "Bass Lead",
+    "ru": "Лид баса"
+  },
+  {
+    "program": 88,
+    "key": "new-age-pad",
+    "en": "New Age Pad",
+    "ru": "Пэд New Age"
+  },
+  {
+    "program": 89,
+    "key": "warm-pad",
+    "en": "Warm Pad",
+    "ru": "Пэд Warm"
+  },
+  {
+    "program": 90,
+    "key": "polysynth-pad",
+    "en": "Polysynth Pad",
+    "ru": "Полисинтезаторный пэд"
+  },
+  {
+    "program": 91,
+    "key": "choir-pad",
+    "en": "Choir Pad",
+    "ru": "Хоровой пэд"
+  },
+  {
+    "program": 92,
+    "key": "bowed-pad",
+    "en": "Bowed Pad",
+    "ru": "Смычковый пэд"
+  },
+  {
+    "program": 93,
+    "key": "metallic-pad",
+    "en": "Metallic Pad",
+    "ru": "Металлический пэд"
+  },
+  {
+    "program": 94,
+    "key": "halo-pad",
+    "en": "Halo Pad",
+    "ru": "Гало-пад"
+  },
+  {
+    "program": 95,
+    "key": "sweep-pad",
+    "en": "Sweep Pad",
+    "ru": "Свеп-пад"
+  },
+  {
+    "program": 96,
+    "key": "rain-effect",
+    "en": "Rain Effect",
+    "ru": "Эффект дождя"
+  },
+  {
+    "program": 97,
+    "key": "soundtrack-effect",
+    "en": "Soundtrack Effect",
+    "ru": "Эффект саундтрека"
+  },
+  {
+    "program": 98,
+    "key": "crystal-effect",
+    "en": "Crystal Effect",
+    "ru": "Кристальный эффект"
+  },
+  {
+    "program": 99,
+    "key": "atmosphere-effect",
+    "en": "Atmosphere Effect",
+    "ru": "Эффект атмосферы"
+  },
+  {
+    "program": 100,
+    "key": "brightness-effect",
+    "en": "Brightness Effect",
+    "ru": "Эффект яркости"
+  },
+  {
+    "program": 101,
+    "key": "goblins-effect",
+    "en": "Goblins Effect",
+    "ru": "Эффект гоблинов"
+  },
+  {
+    "program": 102,
+    "key": "echoes-effect",
+    "en": "Echoes Effect",
+    "ru": "Эффект эха"
+  },
+  {
+    "program": 103,
+    "key": "sci-fi-effect",
+    "en": "Sci-Fi Effect",
+    "ru": "Эффект научной фантастики"
+  },
+  {
+    "program": 104,
+    "key": "sitar",
+    "en": "Sitar",
+    "ru": "Ситар"
+  },
+  {
+    "program": 105,
+    "key": "banjo",
+    "en": "Banjo",
+    "ru": "Банджо"
+  },
+  {
+    "program": 106,
+    "key": "shamisen",
+    "en": "Shamisen",
+    "ru": "Шамисен"
+  },
+  {
+    "program": 107,
+    "key": "koto",
+    "en": "Koto",
+    "ru": "Кото"
+  },
+  {
+    "program": 108,
+    "key": "kalimba",
+    "en": "Kalimba",
+    "ru": "Калимба"
+  },
+  {
+    "program": 109,
+    "key": "bagpipe",
+    "en": "Bagpipe",
+    "ru": "Волынка"
+  },
+  {
+    "program": 110,
+    "key": "fiddle",
+    "en": "Fiddle",
+    "ru": "Скрипка"
+  },
+  {
+    "program": 111,
+    "key": "shanai",
+    "en": "Shanai",
+    "ru": "Шанай"
+  },
+  {
+    "program": 112,
+    "key": "tinkle-bell",
+    "en": "Tinkle Bell",
+    "ru": "Звонок"
+  },
+  {
+    "program": 113,
+    "key": "agogo",
+    "en": "Agogo",
+    "ru": "Агого"
+  },
+  {
+    "program": 114,
+    "key": "steel-drums",
+    "en": "Steel Drums",
+    "ru": "Стальные барабаны"
+  },
+  {
+    "program": 115,
+    "key": "woodblock",
+    "en": "Woodblock",
+    "ru": "Вудблок"
+  },
+  {
+    "program": 116,
+    "key": "taiko-drum",
+    "en": "Taiko Drum",
+    "ru": "Тайко-барабан"
+  },
+  {
+    "program": 117,
+    "key": "melodic-tom",
+    "en": "Melodic Tom",
+    "ru": "Мелодический том"
+  },
+  {
+    "program": 118,
+    "key": "synth-drum",
+    "en": "Synth Drum",
+    "ru": "Синтезаторный барабан"
+  },
+  {
+    "program": 119,
+    "key": "reverse-cymbal",
+    "en": "Reverse Cymbal",
+    "ru": "Обратный цимбал"
+  },
+  {
+    "program": 120,
+    "key": "guitar-fret-noise",
+    "en": "Guitar Fret Noise",
+    "ru": "Шум гитарных ладов"
+  },
+  {
+    "program": 121,
+    "key": "breath-noise",
+    "en": "Breath Noise",
+    "ru": "Шум дыхания"
+  },
+  {
+    "program": 122,
+    "key": "seashore",
+    "en": "Seashore",
+    "ru": "Морской берег"
+  },
+  {
+    "program": 123,
+    "key": "bird-tweet",
+    "en": "Bird Tweet",
+    "ru": "Пение птиц"
+  },
+  {
+    "program": 124,
+    "key": "telephone-ring",
+    "en": "Telephone Ring",
+    "ru": "Звонок телефона"
+  },
+  {
+    "program": 125,
+    "key": "helicopter",
+    "en": "Helicopter",
+    "ru": "Вертолет"
+  },
+  {
+    "program": 126,
+    "key": "applause",
+    "en": "Applause",
+    "ru": "Аплодисменты"
+  },
+  {
+    "program": 127,
+    "key": "gunshot",
+    "en": "Gunshot",
+    "ru": "Выстрел"
+  }
+]
