@@ -3,11 +3,6 @@ using System.Text;
 
 namespace SS14Utility.Midi;
 
-/// <summary>
-///     Headless smoke test: boots the synth exactly like the UI does, plays a file for a few seconds and
-///     writes what happened to a log file. Run with:
-///     SS14Utility.exe --selftest [midi file] [instrument id] [seconds] [--limits]
-/// </summary>
 public static class SelfTest
 {
     public static int Run(string[] args)
@@ -28,7 +23,7 @@ public static class SelfTest
                 if (args[i].StartsWith("--"))
                 {
                     if (args[i] is "--render" or "--maxeps")
-                        i++; // Skip its value.
+                        i++;
 
                     continue;
                 }
@@ -79,7 +74,6 @@ public static class SelfTest
             engine.ApplyInstrument(instrument.Program, instrument.Bank, instrument.AllowPercussion, instrument.AllowProgramChange);
             engine.Limits.RespectMidiLimits = instrument.RespectMidiLimits;
 
-            // Lets the test squeeze the limits to check the simulation actually kicks in.
             var epsIndex = Array.IndexOf(args, "--maxeps");
             if (epsIndex >= 0 && epsIndex + 1 < args.Length && int.TryParse(args[epsIndex + 1], out var maxEps))
             {

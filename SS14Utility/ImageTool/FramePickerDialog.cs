@@ -2,11 +2,6 @@ using System.Drawing.Imaging;
 
 namespace SS14Utility.ImageTool;
 
-/// <summary>
-///     Lets the user scrub through an animated GIF and pick one frame to use. GDI+ only exposes
-///     frame-stepping for GIF (via FrameDimension.Time) - animated WEBP/APNG load as their single
-///     default frame instead of offering a picker, a platform limitation, not a missed format.
-/// </summary>
 public sealed class FramePickerDialog : Form
 {
     private readonly Image _source;

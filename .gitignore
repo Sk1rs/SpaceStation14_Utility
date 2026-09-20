@@ -6,6 +6,7 @@ obj/
 # Reference clones used only by SS14Utility/tools/extract_*.py
 repo/
 rt/
+__pycache__/
 
 # OS / editor cruft
 .vs/

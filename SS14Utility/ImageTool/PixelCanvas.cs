@@ -3,14 +3,13 @@ using System.Drawing.Imaging;
 
 namespace SS14Utility.ImageTool;
 
-/// <summary>A grid of pixels that can be painted by click (and click-drag). Ported from main.py's PixelCanvas.</summary>
 public sealed class PixelCanvas : Panel
 {
     public int CellSize;
     public Color PaintColor = Color.Black;
     public bool TileMode;
     public Bitmap Image;
-    public string Tool = "pencil"; // pencil, fill, line, rect
+    public string Tool = "pencil";
     public bool FilledShapes;
     public bool Symmetry;
     public bool IsoGrid;
@@ -109,8 +108,6 @@ public sealed class PixelCanvas : Panel
         var y = CellSize > 0 ? pos.Y / CellSize : 0;
         if (TileMode)
         {
-            // The widget shows a 3x3 repeat of the canvas; wrap any click back into the real
-            // 0..w-1/0..h-1 range so painting across a tile seam is possible and wraps around.
             x = ((x - Image.Width) % Image.Width + Image.Width) % Image.Width;
             y = ((y - Image.Height) % Image.Height + Image.Height) % Image.Height;
         }
@@ -344,7 +341,6 @@ public sealed class PixelCanvas : Panel
         }
     }
 
-    /// <summary>Draws a 2:1 isometric diamond guide grid on top - a visual aid only, doesn't affect pixels.</summary>
     private void DrawIsoGrid(Graphics g, int w, int h, Point offset)
     {
         var tw = Math.Max(2, IsoTileWidth);

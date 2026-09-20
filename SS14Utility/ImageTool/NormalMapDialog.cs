@@ -1,9 +1,5 @@
 namespace SS14Utility.ImageTool;
 
-/// <summary>
-///     Generates a tangent-space normal map from the current output image - an export-only asset for
-///     real-time lighting in an external game engine. SS14's paper text can't use this itself.
-/// </summary>
 public sealed class NormalMapDialog : Form
 {
     private readonly PixelBuffer _source;

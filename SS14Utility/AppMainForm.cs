@@ -4,7 +4,6 @@ using SS14Utility.Midi;
 
 namespace SS14Utility;
 
-/// <summary>The single top-level window: a tab per tool.</summary>
 public sealed class AppMainForm : Form
 {
     private readonly MidiPlayerPanel _midiPanel = new();

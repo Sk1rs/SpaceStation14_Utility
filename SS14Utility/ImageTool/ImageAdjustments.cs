@@ -1,6 +1,5 @@
 namespace SS14Utility.ImageTool;
 
-/// <summary>Per-pixel color adjustments and palette tools, ported from SSfyImage's main.py.</summary>
 public static class ImageAdjustments
 {
     public static void Grayscale(PixelBuffer buf)
@@ -24,7 +23,6 @@ public static class ImageAdjustments
         }
     }
 
-    /// <summary>Ports PIL's ImageEnhance.Brightness: a straight per-channel multiply by `factor`.</summary>
     public static void Brightness(PixelBuffer buf, double factor)
     {
         for (var y = 0; y < buf.Height; y++)
@@ -35,10 +33,6 @@ public static class ImageAdjustments
         }
     }
 
-    /// <summary>
-    ///     Ports PIL's ImageEnhance.Contrast: blends every pixel toward the image's own mean luminance
-    ///     (the "degenerate" solid-gray image PIL builds from `ImageStat.Stat(im.convert("L")).mean`).
-    /// </summary>
     public static void Contrast(PixelBuffer buf, double factor)
     {
         double sum = 0;
@@ -59,7 +53,6 @@ public static class ImageAdjustments
         }
     }
 
-    /// <summary>Keeps only the top `bits` bits of each channel - PIL's ImageOps.posterize.</summary>
     public static void Posterize(PixelBuffer buf, int bits)
     {
         var mask = (byte)(~((1 << (8 - bits)) - 1) & 0xFF);
@@ -88,10 +81,6 @@ public static class ImageAdjustments
         }
     }
 
-    /// <summary>
-    ///     Floyd-Steinberg dithers RGB to the same 16-level buckets <see cref="SsColor" /> truncates
-    ///     non-#RRGGBB colors to, turning quantization banding into a much smoother-looking pattern.
-    /// </summary>
     public static void Dither(PixelBuffer buf)
     {
         var w = buf.Width;
@@ -123,7 +112,6 @@ public static class ImageAdjustments
         }
     }
 
-    /// <summary>Replaces every pixel matching a key in `mapping` (exact ARGB match) with its mapped color.</summary>
     public static void Recolor(PixelBuffer buf, IReadOnlyDictionary<Color, Color> mapping)
     {
         if (mapping.Count == 0) return;
@@ -133,7 +121,6 @@ public static class ImageAdjustments
                 buf[x, y] = replacement;
     }
 
-    /// <summary>Median-cut quantizes a reference image down to its `nColors` most representative colors.</summary>
     public static List<Color> ExtractPalette(PixelBuffer reference, int nColors)
     {
         var points = new List<(int r, int g, int b)>(reference.Width * reference.Height);
@@ -202,7 +189,6 @@ public static class ImageAdjustments
         return gr >= br ? (gr, 1) : (br, 2);
     }
 
-    /// <summary>Snaps every pixel's RGB to the nearest color in `palette` (RGB Euclidean distance), keeping alpha.</summary>
     public static void ApplyPalette(PixelBuffer buf, IReadOnlyList<Color> palette)
     {
         if (palette.Count == 0) return;
@@ -233,8 +219,6 @@ public static class ImageAdjustments
         }
     }
 
-    // A handful of well-known retro hardware colors, used only for the "style preview" - a fun
-    // approximation, not a byte-accurate emulator (real per-tile palette limits etc. are ignored).
     public static readonly Color[] GameBoyPalette =
     {
         Color.FromArgb(15, 56, 15), Color.FromArgb(48, 98, 48),
@@ -264,10 +248,8 @@ public static class ImageAdjustments
     public static void StyleGameBoy(PixelBuffer buf) => ApplyPalette(buf, GameBoyPalette);
     public static void StyleNes(PixelBuffer buf) => ApplyPalette(buf, NesPalette);
 
-    /// <summary>Approximates the Mega Drive's 9-bit RGB (3 bits per channel).</summary>
     public static void StyleGenesis(PixelBuffer buf) => Posterize(buf, 3);
 
-    /// <summary>Cheap arcade-CRT look: darkened scanlines every other row.</summary>
     public static void StyleCrt(PixelBuffer buf)
     {
         for (var y = 0; y < buf.Height; y += 2)
@@ -289,11 +271,6 @@ public static class ImageAdjustments
         ["Arcade CRT"] = StyleCrt,
     };
 
-    /// <summary>
-    ///     Builds a tangent-space normal map (RGB) from a pixel-art image's brightness (and optionally
-    ///     silhouette rounding) - an export-only asset for lighting in an external game engine. SS14 has
-    ///     no use for this itself.
-    /// </summary>
     public static PixelBuffer GenerateNormalMap(PixelBuffer source, double strength, bool useSilhouette)
     {
         var w = source.Width;
@@ -347,10 +324,6 @@ public static class ImageAdjustments
         return result;
     }
 
-    /// <summary>
-    ///     Cheap approximate distance-to-edge: 0 right at the silhouette edge (and outside it), ramping
-    ///     up to full strength `radius` pixels inward - gives sprites a rounded-bump look.
-    /// </summary>
     private static double[,] SilhouetteFalloff(PixelBuffer source, int radius)
     {
         var w = source.Width;
@@ -375,7 +348,6 @@ public static class ImageAdjustments
         return falloff;
     }
 
-    /// <summary>3x3 erosion (PIL's MinFilter(3) on a binary mask): a pixel survives only if its whole neighborhood is set.</summary>
     private static bool[,] MinFilter3(bool[,] mask, int w, int h)
     {
         var result = new bool[w, h];
@@ -395,7 +367,6 @@ public static class ImageAdjustments
         return result;
     }
 
-    /// <summary>Manual 3x3 Sobel gradient (images here are small enough that a plain per-pixel loop is fine).</summary>
     private static void Sobel(double[,] height, int w, int h, out double[,] gx, out double[,] gy)
     {
         gx = new double[w, h];
@@ -415,7 +386,6 @@ public static class ImageAdjustments
 
     private static byte Scale(byte v, double factor) => (byte)Math.Clamp(v * factor, 0, 255);
 
-    // PIL-style RGB<->HSV with H/S/V all scaled to 0..255 (not the usual 0..360/0..1/0..1).
     private static void RgbToHsv(byte r, byte g, byte b, out int h, out int s, out int v)
     {
         double rd = r / 255.0, gd = g / 255.0, bd = b / 255.0;

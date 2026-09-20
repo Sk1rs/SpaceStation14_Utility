@@ -3,7 +3,6 @@ using static SS14Utility.UiKit;
 
 namespace SS14Utility.ImageTool;
 
-/// <summary>Main UI for the image-to-SS14-text converter - ported from main.py's Window class.</summary>
 public sealed class ImageToolPanel : UserControl
 {
     private const string UsefulVideoUrl = "https://youtu.be/9FCF2Y4lIWk?si=LEDw75eOhhTPN_Ua";
@@ -54,7 +53,6 @@ public sealed class ImageToolPanel : UserControl
 
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
-        // Only hijacks Ctrl+V when the output box isn't focused, so pasting text into it still works.
         if (keyData == (Keys.Control | Keys.V) && !_txtOutput.Focused)
         {
             OnPaste();
@@ -67,11 +65,6 @@ public sealed class ImageToolPanel : UserControl
 
     private void BuildUi()
     {
-        // Each group box auto-sizes its own height to fit however many rows its buttons wrap to
-        // (fixed pixel row heights can't predict that), so everything is stacked with Dock instead
-        // of a TableLayoutPanel. For same-edge Dock.Top controls, WinForms docks the LAST-added one
-        // outermost (topmost) - so to get Source at the very top down to Output just above the
-        // content area, they're added in reverse of that visual order.
         var groupsBottomToTop = new[]
         {
             BuildOutputGroup(),
@@ -85,10 +78,6 @@ public sealed class ImageToolPanel : UserControl
 
         _lblInfo = new Label { Height = 26, TextAlign = ContentAlignment.MiddleCenter, Text = "Изображение не загружено" };
 
-        // Dock.Fill on `_content` would depend on WinForms re-running this panel's Fill calculation
-        // every time a group box above it changes height via AttachAutoHeight - which, empirically,
-        // it does not reliably do (Fill ends up sized against a stale pre-resize snapshot of the
-        // groups, overlapping them). Positioning both manually below sidesteps that entirely.
         _content = BuildContent();
         _content.Dock = DockStyle.None;
 
@@ -339,10 +328,6 @@ public sealed class ImageToolPanel : UserControl
         return split;
     }
 
-    // Shared layout helpers (MakeGroup, MakeFlow, AttachAutoHeight, MakeButton, MakeCheck, MakeLabel,
-    // MakeSlider, MakeNumeric, StyleInput, StyleCombo, color constants) now live in UiKit - see the
-    // `using static` above.
-
     #endregion
 
     #region Transform / preview
@@ -447,7 +432,7 @@ public sealed class ImageToolPanel : UserControl
         {
             var frameCount = 1;
             try { frameCount = img.GetFrameCount(FrameDimension.Time); }
-            catch { /* format has no Time frame dimension */ }
+            catch {  }
 
             if (frameCount <= 1)
             {
@@ -654,7 +639,6 @@ public sealed class ImageToolPanel : UserControl
         SetResize(w, h);
     }
 
-    /// <summary>Shrinks the current size (keeping its aspect ratio) until the FULL image fits under the symbol limit.</summary>
     private void OnFitToLimit()
     {
         var baseW = (int)_spinW.Value;
@@ -668,8 +652,6 @@ public sealed class ImageToolPanel : UserControl
             var savedResize = _state.ResizeSize;
             var savedLimit = _state.UseLimit;
             _state.ResizeSize = new Size(w, h);
-            // Measure the TRUE, untruncated length regardless of the "use limit" checkbox, otherwise
-            // a truncated probe always looks like it "fits" and the search never shrinks.
             _state.UseLimit = false;
             var (text, _) = ImageTransformer.Transform(_state);
             _state.ResizeSize = savedResize;
@@ -716,7 +698,6 @@ public sealed class ImageToolPanel : UserControl
         var parsed = ImageTransformer.ParseSs14Text(text, _state.Symbol);
         if (parsed == null)
         {
-            // Doesn't look like valid SS14 markup - just show the raw text, no preview to derive.
             _currentPreview = null;
             ShowPreview(null);
             _txtOutput.Text = text;

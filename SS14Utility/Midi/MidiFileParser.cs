@@ -2,18 +2,12 @@ using System.Text;
 
 namespace SS14Utility.Midi;
 
-/// <summary>
-///     Track info as the game extracts it for its channel list.
-/// </summary>
 public sealed class MidiTrackInfo
 {
     public string? TrackName;
     public string? InstrumentName;
     public string? ProgramName;
 
-    /// <summary>
-    ///     Label for the channel list, mirroring ChannelsMenu.Populate().
-    /// </summary>
     public string Label(int channel, bool trackNames)
     {
         var fallback = "MIDI канал " + channel;
@@ -36,11 +30,6 @@ public sealed class MidiTrackInfo
     }
 }
 
-/// <summary>
-///     Port of Content.Client.Instruments.MidiParser: reads track names, instrument names and the
-///     first program change of every track, exactly like the game's channel menu does.
-///     Thanks again to http://www.somascape.org/midi/tech/mfile.html
-/// </summary>
 public static class MidiFileParser
 {
     public static bool TryGetTracks(byte[] data, out List<MidiTrackInfo?> tracks, out int division, out string? error)
@@ -54,7 +43,6 @@ public static class MidiFileParser
             if (!TryParse(data, out var parsed, out division, out error))
                 return false;
 
-            // Same resolution the game does before sending channels to the server.
             foreach (var track in parsed)
             {
                 if (track is { TrackName: null, ProgramName: null, InstrumentName: null })
@@ -92,9 +80,9 @@ public static class MidiFileParser
 
         var headerLength = stream.ReadUInt32();
 
-        stream.Skip(2); // format
+        stream.Skip(2);
         var trackCount = stream.ReadUInt16();
-        division = stream.ReadUInt16(); // ticks per quarter note, when positive
+        division = stream.ReadUInt16();
 
         stream.Skip((int) (headerLength - 6));
 
@@ -121,7 +109,7 @@ public static class MidiFileParser
                 if (firstByte >= 0x80)
                     lastStatusByte = firstByte;
                 else
-                    stream.Skip(-1); // Running status.
+                    stream.Skip(-1);
 
                 if (lastStatusByte == null)
                 {
@@ -133,7 +121,7 @@ public static class MidiFileParser
 
                 switch (lastStatusByte)
                 {
-                    case 0xFF: // Meta events.
+                    case 0xFF:
                     {
                         var metaType = stream.ReadByte();
                         var metaLength = stream.ReadVariableLengthQuantity();
@@ -159,7 +147,7 @@ public static class MidiFileParser
                     }
 
                     case 0xF0:
-                    case 0xF7: // SysEx events.
+                    case 0xF7:
                     {
                         var sysexLength = stream.ReadVariableLengthQuantity();
                         stream.Skip((int) sysexLength);
@@ -170,25 +158,25 @@ public static class MidiFileParser
                     default:
                         switch (eventType)
                         {
-                            case 0xC0: // Program Change
+                            case 0xC0:
                             {
                                 var programNumber = stream.ReadByte();
                                 track.ProgramName ??= Catalog.ProgramName(programNumber);
                                 break;
                             }
 
-                            case 0x80: // Note Off
-                            case 0x90: // Note On
-                            case 0xA0: // Polyphonic Key Pressure
-                            case 0xB0: // Control Change
-                            case 0xE0: // Pitch Bend
+                            case 0x80:
+                            case 0x90:
+                            case 0xA0:
+                            case 0xB0:
+                            case 0xE0:
                             {
                                 hasMidiEvent = true;
                                 stream.Skip(2);
                                 break;
                             }
 
-                            case 0xD0: // Channel Pressure
+                            case 0xD0:
                             {
                                 hasMidiEvent = true;
                                 stream.Skip(1);
@@ -224,9 +212,6 @@ public static class MidiFileParser
         return sanitized.ToString().Trim();
     }
 
-    /// <summary>
-    ///     Port of MidiStreamWrapper: big-endian reads over a MIDI file.
-    /// </summary>
     private sealed class Reader
     {
         private readonly byte[] _data;
@@ -277,9 +262,6 @@ public static class MidiFileParser
             return (uint) ((ReadByte() << 24) | (ReadByte() << 16) | (ReadByte() << 8) | ReadByte());
         }
 
-        /// <summary>
-        ///     Variable length quantity, up to 4 bytes, 7 bits each.
-        /// </summary>
         public uint ReadVariableLengthQuantity()
         {
             uint result = 0;

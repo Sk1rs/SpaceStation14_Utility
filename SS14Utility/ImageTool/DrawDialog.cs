@@ -1,6 +1,5 @@
 namespace SS14Utility.ImageTool;
 
-/// <summary>A small pixel-art editor used to draw an image (or touch up the current output) by hand.</summary>
 public sealed class DrawDialog : Form
 {
     private readonly PixelCanvas _canvas;

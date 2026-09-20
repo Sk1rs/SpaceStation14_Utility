@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 
 namespace SS14Utility.ImageTool;
 
-/// <summary>Mutable session state for one conversion - mirrors main.py's module-level globals.</summary>
 public sealed class ImageToolState
 {
     public bool FullColor;
@@ -19,7 +18,6 @@ public sealed class ImageToolState
     public readonly Dictionary<Color, Color> RecolorMap = new();
     public List<Color>? ActivePalette;
 
-    // Standard SS14 paper symbol limit is 10000 (at least in RMC-14).
     public int SymbolLimit = 10050;
     public bool UseLimit = true;
 
@@ -27,17 +25,14 @@ public sealed class ImageToolState
     public Size OriginalSize;
     public Size ResizeSize;
 
-    // Standard SS14 paper size, in pixels (2 characters wide, so 21x26 fits nicely).
     public static readonly Size PaperSize = new(21, 26);
 
     public string Symbol = "██";
-    public string SymbolMode = "solid"; // "solid" (always Symbol) or "shading" (glyph density follows brightness)
-    public const string ShadeRamp = "░▒▓█"; // sparse -> dense
+    public string SymbolMode = "solid";
+    public const string ShadeRamp = "░▒▓█";
 
-    /// <summary>The loaded/drawn/pasted source image, before any adjustment is applied.</summary>
     public PixelBuffer? SourceImage;
 
-    /// <summary>True for pasted/drawn/parsed images - resized with NEAREST to stay crisp instead of blurring like a photo.</summary>
     public bool IsCustomImage;
 }
 
@@ -72,8 +67,6 @@ public static class ImageTransformer
         var line = new StringBuilder();
         var blankUnit = new string(' ', st.SymbolMode == "shading" ? 2 : st.Symbol.Length);
 
-        // Persists across row boundaries on purpose: an SS14 [color] tag stays in scope across the
-        // embedded "\n", so a run that continues into the next row shouldn't re-emit the same tag.
         string? prevColorHex = null;
         var row = 0;
 
@@ -133,7 +126,6 @@ public static class ImageTransformer
         return (text.ToString(), cropped);
     }
 
-    /// <summary>Resizes with a GDI+ pipeline that keeps straight (non-premultiplied) alpha and no dark edge fringing.</summary>
     private static PixelBuffer Resize(PixelBuffer source, int width, int height, bool nearest)
     {
         width = Math.Max(1, width);
@@ -157,7 +149,6 @@ public static class ImageTransformer
 
     private static readonly Regex ColorTagRegex = new(@"\G\[color=#([0-9a-fA-F]{3,8})\]", RegexOptions.Compiled);
 
-    /// <summary>Reverses Transform(): turns previously generated SS14 markup text back into a pixel image.</summary>
     public static PixelBuffer? ParseSs14Text(string text, string pixelSymbol)
     {
         text = text.Replace("\r\n", "\n").Replace("\r", "\n");
@@ -171,8 +162,6 @@ public static class ImageTransformer
         if (unit == 0) return null;
         var blank = new string(' ', unit);
 
-        // null means "no color established yet" - a bare (untagged) glyph before any tag is invalid,
-        // which is what lets this reject unrelated/foreign text instead of misreading it as an image.
         (byte r, byte g, byte b, byte a)? currentColor = null;
         var rows = new List<List<(byte r, byte g, byte b, byte a)?>>();
 
@@ -214,8 +203,6 @@ public static class ImageTransformer
             rows.Add(row);
         }
 
-        // Width is however many pixels were actually parsed out of each row, not raw character count
-        // (tag text like "[color=#fff]" would otherwise massively inflate a naive length-based estimate).
         var width = rows.Count == 0 ? 0 : rows.Max(r => r.Count);
         var height = rows.Count;
         if (width == 0 || height == 0)
@@ -234,7 +221,6 @@ public static class ImageTransformer
 
     private static byte ExpandHexChannel(string chunk) => (byte)Convert.ToInt32(chunk.Length == 1 ? chunk + chunk : chunk, 16);
 
-    /// <summary>Reverses SsColor.GetColor(): turns a #rgb/#rgba/#rrggbb/#rrggbbaa hex string back into (r,g,b,a).</summary>
     private static (byte, byte, byte, byte)? ParseColorTag(string hex)
     {
         var n = hex.Length;

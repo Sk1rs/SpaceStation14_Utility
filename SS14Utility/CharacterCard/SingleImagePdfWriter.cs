@@ -4,11 +4,6 @@ using System.Text;
 
 namespace SS14Utility.CharacterCard;
 
-/// <summary>
-///     Writes a one-page PDF containing a single full-bleed raster image - just enough PDF to be
-///     printable, hand-built so the project doesn't need a PDF library dependency for one feature.
-///     The image is embedded losslessly (FlateDecode over raw RGB), not as JPEG, so card text stays sharp.
-/// </summary>
 public static class SingleImagePdfWriter
 {
     public static void Save(string path, Bitmap image, float dpi = 150f)
@@ -25,7 +20,7 @@ public static class SingleImagePdfWriter
 
         Write("%PDF-1.4\n%âãÏÓ\n");
 
-        var offsets = new long[6]; // index 1..5 used
+        var offsets = new long[6];
 
         offsets[1] = ms.Position;
         Write("1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n");
@@ -88,7 +83,6 @@ public static class SingleImagePdfWriter
                 {
                     var si = srcRow + x * 3;
                     var di = dstRow + x * 3;
-                    // 24bppRgb is stored as BGR - PDF DeviceRGB wants RGB.
                     outBytes[di] = raw[si + 2];
                     outBytes[di + 1] = raw[si + 1];
                     outBytes[di + 2] = raw[si];

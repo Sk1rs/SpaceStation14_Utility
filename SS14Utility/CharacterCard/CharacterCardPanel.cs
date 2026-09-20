@@ -2,7 +2,6 @@ using static SS14Utility.UiKit;
 
 namespace SS14Utility.CharacterCard;
 
-/// <summary>UI for the character card generator: 4 sprite exports + text fields -> a D&D-style card.</summary>
 public sealed class CharacterCardPanel : UserControl
 {
     private readonly CharacterCardData _data = new();
@@ -39,11 +38,6 @@ public sealed class CharacterCardPanel : UserControl
         _stackedGroups = groupsBottomToTop;
 
         _content = (Panel)BuildContent();
-        // Dock.Fill on `_content` here would depend on WinForms re-running the parent's Fill
-        // calculation every time a group box above it changes height via AttachAutoHeight - which,
-        // empirically, it does not reliably do (Fill ends up sized against a stale pre-resize
-        // snapshot of the groups, overlapping them). Positioning it manually below sidesteps that
-        // entirely: always correct, regardless of how many times the groups above it resize.
         _content.Dock = DockStyle.None;
 
         foreach (var g in groupsBottomToTop)
@@ -181,7 +175,7 @@ public sealed class CharacterCardPanel : UserControl
         try
         {
             using var raw = new Bitmap(dialog.FileName);
-            loaded = new Bitmap(raw); // detach from the file handle
+            loaded = new Bitmap(raw);
         }
         catch
         {

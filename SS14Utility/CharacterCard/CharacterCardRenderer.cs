@@ -3,11 +3,10 @@ using System.Drawing.Text;
 
 namespace SS14Utility.CharacterCard;
 
-/// <summary>Draws a D&D-style character sheet card from <see cref="CharacterCardData" /> onto a Bitmap.</summary>
 public static class CharacterCardRenderer
 {
     public const int CardWidth = 1240;
-    public const int CardHeight = 1754; // ~A4 @ 150 DPI
+    public const int CardHeight = 1754;
 
     private static readonly Color ParchmentLight = Color.FromArgb(250, 240, 217);
     private static readonly Color ParchmentDark = Color.FromArgb(210, 186, 142);
@@ -57,7 +56,6 @@ public static class CharacterCardRenderer
         using (var baseBrush = new LinearGradientBrush(new Point(0, 0), new Point(CardWidth, CardHeight), ParchmentLight, ParchmentDark))
             g.FillRectangle(baseBrush, 0, 0, CardWidth, CardHeight);
 
-        // Soft vignette toward the edges - fakes an aged-paper look without needing a texture asset.
         using var path = new GraphicsPath();
         path.AddEllipse(-CardWidth * 0.3f, -CardHeight * 0.25f, CardWidth * 1.6f, CardHeight * 1.5f);
         using var vignette = new PathGradientBrush(path)
@@ -108,7 +106,6 @@ public static class CharacterCardRenderer
         g.DrawString(name, nameFont, nameBrush, frame.Left + (frame.Width - nameSize.Width) / 2, y);
         y += (int)nameSize.Height + 6;
 
-        // Decorative rule with a diamond at the centre.
         var ruleY = y + 6;
         using (var rulePen = new Pen(Gold, 2))
         {
@@ -183,8 +180,6 @@ public static class CharacterCardRenderer
         g.DrawString("нет фото", font, brush, box, format);
     }
 
-    /// <summary>Draws `image` centered in `box`, preserving aspect ratio (letterboxed, never cropped).
-    /// Nearest-neighbor when enlarging keeps pixel-art sprites crisp; smooth when shrinking.</summary>
     private static void DrawFitted(Graphics g, Bitmap image, Rectangle box)
     {
         var scale = Math.Min((float)box.Width / image.Width, (float)box.Height / image.Height);
@@ -222,7 +217,6 @@ public static class CharacterCardRenderer
         using var rowFont = new Font(BodyFontFamily, 17);
         using var textBrush = new SolidBrush(Ink);
         var rowHeight = Math.Max(28, Math.Min(40, contentBox.Height / skills.Count));
-        // Short skill lists otherwise sit stranded at the top of a box sized for a much longer list.
         var startY = contentBox.Top + Math.Max(0, (contentBox.Height - skills.Count * rowHeight) / 2);
 
         for (var i = 0; i < skills.Count; i++)
@@ -255,8 +249,6 @@ public static class CharacterCardRenderer
         var text = string.IsNullOrWhiteSpace(data.Lore) ? "— лор не указан —" : data.Lore;
         using var font = FitParagraphFont(g, text, BodyFontFamily, FontStyle.Italic, 19, contentBox.Size);
         using var brush = new SolidBrush(Ink);
-        // Vertically centered so short lore doesn't look stranded at the top of a box sized to also
-        // fit much longer backstories.
         var format = new StringFormat { Trimming = StringTrimming.EllipsisWord, LineAlignment = StringAlignment.Center };
         g.DrawString(text, font, brush, contentBox, format);
     }
@@ -289,7 +281,6 @@ public static class CharacterCardRenderer
         g.DrawString("Сгенерировано в SS14 Utility", font, brush, new RectangleF(frame.Left, frame.Bottom - 22, frame.Width, 20), format);
     }
 
-    /// <summary>Shrinks a font size until `text` fits on one line within `maxWidth`.</summary>
     private static Font FitSingleLineFont(Graphics g, string text, string family, FontStyle style, float startSize, float maxWidth)
     {
         var size = startSize;
@@ -303,7 +294,6 @@ public static class CharacterCardRenderer
         return new Font(family, size, style);
     }
 
-    /// <summary>Shrinks a font size until `text` (word-wrapped) fits within `area`.</summary>
     private static Font FitParagraphFont(Graphics g, string text, string family, FontStyle style, float startSize, Size area)
     {
         var size = startSize;

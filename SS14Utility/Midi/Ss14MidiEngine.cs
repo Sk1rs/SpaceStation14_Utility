@@ -15,10 +15,6 @@ public enum MidiCommand : byte
     SystemMessage = 0xF0,
 }
 
-/// <summary>
-///     A single MIDI event as it comes out of the file player, in the same shape the game networks them
-///     (status byte with command + channel, two data bytes).
-/// </summary>
 public readonly struct PlayerEvent
 {
     public readonly byte Status;
@@ -58,17 +54,11 @@ public readonly struct PlayerEvent
         => new((byte) ((byte) MidiCommand.SystemMessage | 0x0F), 0x0, 0x0);
 }
 
-/// <summary>
-///     Fluidsynth-backed MIDI player that reproduces how RobustToolbox's MidiRenderer and the SS14
-///     Instrument component treat a MIDI file: same synth settings, same soundfont order, same program
-///     locking, percussion filtering and channel filtering.
-/// </summary>
 public sealed class Ss14MidiEngine : IDisposable
 {
     public const int ChannelCount = 16;
     public const int PercussionChannel = 9;
 
-    /// <summary>The game refuses to play MIDI files larger than this.</summary>
     public const int MidiSizeLimit = 2000000;
 
     private readonly object _lock = new();
@@ -88,24 +78,16 @@ public sealed class Ss14MidiEngine : IDisposable
     public readonly List<string> LoadedSoundfonts = new();
     public readonly GameLimitSimulator Limits;
 
-    /// <summary>Channels that are muted. Index 9 doubles as the percussion switch, like in the game.</summary>
     public bool[] FilteredChannels { get; } = new bool[ChannelCount];
 
-    /// <summary>Mirrors InstrumentComponent.AllowProgramChange being false: the file cannot change program/bank.</summary>
     public bool DisableProgramChangeEvent { get; set; } = true;
 
-    /// <summary>Fires on the polling thread when the file reached its end.</summary>
     public event Action? PlaybackFinished;
 
     public event Action<string>? Log;
 
-    /// <param name="renderFile">
-    ///     When set, audio is rendered to this .wav file instead of the speakers. Used by the self test.
-    /// </param>
     public Ss14MidiEngine(string? renderFile = null)
     {
-        // These are exactly the settings Robust.Client's MidiManager uses, except for the audio driver:
-        // the game renders to OpenAL itself, we let fluidsynth talk to WASAPI.
         _settings = new Settings();
         _settings["synth.sample-rate"].DoubleValue = 44100;
         _settings["player.timing-source"].StringValue = "sample";
@@ -118,7 +100,6 @@ public sealed class Ss14MidiEngine : IDisposable
         _settings["player.reset-synth"].IntValue = 0;
         _settings["synth.midi-bank-select"].StringValue = "gm";
 
-        // midi.parallelism defaults to 1 in the game, which gives 1024 voices on one core.
         _settings["synth.polyphony"].IntValue = 1024;
         _settings["synth.cpu-cores"].IntValue = 1;
 
@@ -139,13 +120,8 @@ public sealed class Ss14MidiEngine : IDisposable
         _pollTimer = new System.Threading.Timer(PollPlayer, null, 100, 100);
     }
 
-    /// <summary>The audio backend fluidsynth ended up using.</summary>
     public string AudioDriverName { get; private set; } = "file";
 
-    /// <summary>
-    ///     Opens the first audio backend that works. WASAPI is the good one on Windows; the others are
-    ///     there for machines where it refuses to open.
-    /// </summary>
     private AudioDriver OpenOutputDriver()
     {
         Exception? last = null;
@@ -168,7 +144,6 @@ public sealed class Ss14MidiEngine : IDisposable
         throw new InvalidOperationException("Не удалось открыть аудиовыход.", last);
     }
 
-    /// <summary>Master volume, matching the game's midi.volume CVar range (0..1).</summary>
     public float Gain
     {
         get => _synth.Gain;
@@ -205,7 +180,6 @@ public sealed class Ss14MidiEngine : IDisposable
         }
     }
 
-    /// <summary>Port of MidiRenderer.MidiProgram: pushes the program onto every channel but percussion.</summary>
     public byte MidiProgram
     {
         get => _midiProgram;
@@ -230,7 +204,6 @@ public sealed class Ss14MidiEngine : IDisposable
         }
     }
 
-    /// <summary>Port of MidiRenderer.MidiBank: bank select followed by a program re-select.</summary>
     public byte MidiBank
     {
         get => _midiBank;
@@ -291,12 +264,10 @@ public sealed class Ss14MidiEngine : IDisposable
                 _player.Seek(Math.Max(Math.Min(value, PlayerTotalTick - 1), 0));
             }
 
-            // Seeking leaves notes hanging, the game deals with this by sending a system reset.
             StopAllNotes();
         }
     }
 
-    /// <summary>Beats per minute the file is currently playing at.</summary>
     public int Bpm
     {
         get
@@ -313,10 +284,6 @@ public sealed class Ss14MidiEngine : IDisposable
 
     #region Soundfonts
 
-    /// <summary>
-    ///     Loads soundfonts in the same order Robust.Client does, so the resulting sound matches the game:
-    ///     engine fallback, then the OS soundfont, then the content ones, then anything in the user directory.
-    /// </summary>
     public void LoadSoundfonts(IEnumerable<string> paths)
     {
         foreach (var path in paths)
@@ -352,7 +319,6 @@ public sealed class Ss14MidiEngine : IDisposable
 
     #region Playback
 
-    /// <summary>Port of MidiRenderer.OpenMidi.</summary>
     public bool OpenMidi(byte[] data, out string? error)
     {
         error = null;
@@ -408,7 +374,6 @@ public sealed class Ss14MidiEngine : IDisposable
         }
     }
 
-    /// <summary>Port of MidiRenderer.CloseMidi.</summary>
     public void CloseMidi()
     {
         lock (_lock)
@@ -479,10 +444,6 @@ public sealed class Ss14MidiEngine : IDisposable
 
     #region Event handling
 
-    /// <summary>
-    ///     Callback fluidsynth's player calls for every MIDI event in the file. The game does the same thing
-    ///     and never lets the player touch the synth directly, which is what makes program locking possible.
-    /// </summary>
     private int HandlePlayerEvent(MidiEvent midiEvent)
     {
         if (_disposed)
@@ -516,9 +477,6 @@ public sealed class Ss14MidiEngine : IDisposable
         return 0;
     }
 
-    /// <summary>
-    ///     Port of MidiRenderer.SendMidiEvent: this is where the instrument's rules are actually applied.
-    /// </summary>
     public void SendMidiEvent(PlayerEvent midiEvent)
     {
         if (_disposed)
@@ -536,7 +494,6 @@ public sealed class Ss14MidiEngine : IDisposable
 
                     case MidiCommand.NoteOn:
                     {
-                        // Velocity 0 *can* represent a NoteOff event.
                         var velocity = midiEvent.Velocity;
                         if (velocity == 0)
                         {
@@ -556,13 +513,12 @@ public sealed class Ss14MidiEngine : IDisposable
                         break;
 
                     case MidiCommand.ControlChange:
-                        // CC0 is bank selection.
                         if (midiEvent.Control == 0x0 && DisableProgramChangeEvent)
                             break;
 
                         if (midiEvent.Control != 0x0)
                             _synth.CC(midiEvent.Channel, midiEvent.Control, midiEvent.Value);
-                        else // Fluidsynth doesn't respect CC0 as bank selection, so it's done manually.
+                        else
                             _synth.BankSelect(midiEvent.Channel, midiEvent.Value);
                         break;
 
@@ -581,8 +537,6 @@ public sealed class Ss14MidiEngine : IDisposable
                         _synth.PitchBend(midiEvent.Channel, midiEvent.Pitch);
                         break;
 
-                    // MIDI files spam these, the game ignores them too. 0x50 is the tempo meta event,
-                    // which the player handles by itself.
                     case (MidiCommand) 0x00:
                     case (MidiCommand) 0x01:
                     case (MidiCommand) 0x05:
@@ -595,7 +549,6 @@ public sealed class Ss14MidiEngine : IDisposable
                             case 0x0 when midiEvent.Status == 0xFF:
                                 _synth.SystemReset();
 
-                                // Reset the instrument to the one we were using.
                                 if (DisableProgramChangeEvent)
                                 {
                                     MidiBank = _midiBank;
@@ -615,11 +568,9 @@ public sealed class Ss14MidiEngine : IDisposable
         }
         catch (IndexOutOfRangeException)
         {
-            // Malformed event, same as the game we just drop it.
         }
         catch (FluidSynthInteropException)
         {
-            // Fluidsynth loves to complain about NoteOff for notes that already ended.
         }
     }
 
@@ -627,9 +578,6 @@ public sealed class Ss14MidiEngine : IDisposable
 
     #region Instrument logic
 
-    /// <summary>
-    ///     Applies an instrument prototype the way InstrumentSystem.UpdateRenderer does.
-    /// </summary>
     public void ApplyInstrument(byte program, byte bank, bool allowPercussion, bool allowProgramChange)
     {
         DisablePercussionChannel = !allowPercussion;
@@ -645,9 +593,6 @@ public sealed class Ss14MidiEngine : IDisposable
         }
     }
 
-    /// <summary>
-    ///     Mutes or unmutes a channel, matching InstrumentSystem.SetFilteredChannel.
-    /// </summary>
     public void SetFilteredChannel(int channel, bool filtered)
     {
         if (channel < 0 || channel >= ChannelCount)
@@ -680,7 +625,6 @@ public sealed class Ss14MidiEngine : IDisposable
             }
             catch
             {
-                // Shutting down anyway.
             }
 
             _player = null;

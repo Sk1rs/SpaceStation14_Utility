@@ -1,6 +1,5 @@
 namespace SS14Utility.ImageTool;
 
-/// <summary>Extracts a small representative palette from any reference image, to apply to the current one.</summary>
 public sealed class PaletteDialog : Form
 {
     private readonly FlowLayoutPanel _swatches = new() { Dock = DockStyle.Fill, AutoScroll = true };

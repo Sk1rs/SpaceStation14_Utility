@@ -4,9 +4,6 @@ using System.Text.Json.Serialization;
 
 namespace SS14Utility.Midi;
 
-/// <summary>
-///     One instrument prototype from the game, as defined by its Instrument component.
-/// </summary>
 public sealed class InstrumentDef
 {
     [JsonPropertyName("id")] public string Id { get; set; } = "";
@@ -20,15 +17,11 @@ public sealed class InstrumentDef
     [JsonPropertyName("styles")] public List<InstrumentStyle>? Styles { get; set; }
     [JsonPropertyName("file")] public string File { get; set; } = "";
 
-    /// <summary>
-    ///     Russian name when the game has one, otherwise the prototype name.
-    /// </summary>
     public string DisplayName
     {
         get
         {
             var ru = NameRu;
-            // Some locale entries are just references to another entity, those are useless here.
             if (string.IsNullOrWhiteSpace(ru) || ru.Contains('{'))
                 return Name;
 
@@ -46,9 +39,6 @@ public sealed class InstrumentDef
     }
 }
 
-/// <summary>
-///     A swappable instrument style, e.g. the guitar's "Jazz" or "Muted" presets.
-/// </summary>
 public sealed class InstrumentStyle
 {
     [JsonPropertyName("name")] public string Name { get; set; } = "";
@@ -56,9 +46,6 @@ public sealed class InstrumentStyle
     [JsonPropertyName("bank")] public byte Bank { get; set; }
 }
 
-/// <summary>
-///     A General MIDI program with the names the game shows in its channel list.
-/// </summary>
 public sealed class ProgramDef
 {
     [JsonPropertyName("program")] public int Program { get; set; }

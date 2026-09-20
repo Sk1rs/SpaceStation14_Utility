@@ -15,14 +15,12 @@ public sealed class MidiPlayerPanel : UserControl
     private readonly AppSettings _settings = AppSettings.Load();
     private readonly System.Windows.Forms.Timer _uiTimer = new() { Interval = 100 };
 
-    // File list
     private readonly TextBox _fileSearch = new();
     private readonly ListBox _fileList = new();
     private readonly Label _folderLabel = new();
     private List<string> _files = new();
     private string? _folder;
 
-    // Instruments
     private readonly TextBox _instrumentSearch = new();
     private readonly ListBox _instrumentList = new();
     private readonly Label _instrumentInfo = new();
@@ -30,7 +28,6 @@ public sealed class MidiPlayerPanel : UserControl
     private List<InstrumentDef> _shownInstruments = new();
     private InstrumentDef? _instrument;
 
-    // Instrument logic
     private readonly NumericUpDown _programBox = new();
     private readonly NumericUpDown _bankBox = new();
     private readonly ComboBox _gmBox = new();
@@ -40,13 +37,11 @@ public sealed class MidiPlayerPanel : UserControl
     private readonly CheckBox _stopOnCrampBox = new();
     private readonly Label _limitsLabel = new();
 
-    // Channels
     private readonly CheckedListBox _channelList = new();
     private readonly CheckBox _trackNamesBox = new();
     private List<MidiTrackInfo?> _tracks = new();
     private int _division = 480;
 
-    // Transport
     private readonly Button _playButton = new();
     private readonly Button _stopButton = new();
     private readonly TrackBar _positionBar = new();
@@ -78,7 +73,6 @@ public sealed class MidiPlayerPanel : UserControl
         Load += OnFormLoad;
     }
 
-    /// <summary>Called by the host form on exit, since a UserControl has no FormClosing of its own.</summary>
     public void Shutdown() => OnFormClosing();
 
     #region UI construction
@@ -91,8 +85,6 @@ public sealed class MidiPlayerPanel : UserControl
             BackColor = BgColor,
             SplitterWidth = 6,
         };
-        // WinForms lays docked controls out back-to-front, so the bottom bar goes in first and the
-        // filling splitter is brought to the front to get whatever space is left.
         Controls.Add(BuildTransport());
         Controls.Add(outerSplit);
         outerSplit.BringToFront();
@@ -114,9 +106,6 @@ public sealed class MidiPlayerPanel : UserControl
         right.Controls.Add(BuildChannels());
         right.Controls.Add(BuildLogic());
 
-        // A UserControl has no Shown event, so defer past the current message-loop tick with
-        // BeginInvoke instead - by then the host form has finished laying out the docked panel
-        // and the splitters have their real width, same as Shown would have guaranteed on a Form.
         HandleCreated += (_, _) => BeginInvoke(new Action(() =>
         {
             SetupSplitter(outerSplit, 200, 320, 320);
@@ -137,7 +126,6 @@ public sealed class MidiPlayerPanel : UserControl
         }
         catch (InvalidOperationException)
         {
-            // Window too small for the requested split, WinForms keeps its own arrangement.
         }
     }
 
@@ -359,7 +347,6 @@ public sealed class MidiPlayerPanel : UserControl
 
     private Control BuildTransport()
     {
-        // Docked rows instead of fixed coordinates, so nothing overlaps when the window is resized.
         var panel = new Panel { Dock = DockStyle.Bottom, Height = 152, BackColor = PanelColor, Padding = new Padding(12, 8, 12, 8) };
 
         _nowPlayingLabel.Dock = DockStyle.Top;
@@ -448,7 +435,6 @@ public sealed class MidiPlayerPanel : UserControl
         _statusLabel.ForeColor = MutedColor;
         _statusLabel.AutoEllipsis = true;
 
-        // Docked top controls stack in reverse order of adding.
         panel.Controls.Add(_statusLabel);
         panel.Controls.Add(volumeRow);
         panel.Controls.Add(controlsRow);
@@ -835,7 +821,6 @@ public sealed class MidiPlayerPanel : UserControl
 
         _engine.CloseMidi();
 
-        // The game parses the file for channel names before playback starts.
         if (MidiFileParser.TryGetTracks(data, out var tracks, out var division, out var parseError))
         {
             _tracks = tracks;
@@ -850,7 +835,6 @@ public sealed class MidiPlayerPanel : UserControl
 
         PopulateChannels();
 
-        // Force the file to start on the instrument's own program, exactly like the renderer does.
         ReapplyProgramLock();
 
         if (!OpenMidiChecked(data))
@@ -954,9 +938,6 @@ public sealed class MidiPlayerPanel : UserControl
         ApplyInstrument(instrument, true);
     }
 
-    /// <summary>
-    ///     Applies the prototype the way InstrumentSystem.UpdateRenderer does, then mirrors it into the UI.
-    /// </summary>
     private void ApplyInstrument(InstrumentDef? instrument, bool resetOverrides)
     {
         if (instrument == null)

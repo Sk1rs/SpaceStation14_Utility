@@ -1,6 +1,5 @@
 namespace SS14Utility.ImageTool;
 
-/// <summary>Shown once on startup: what the image tool is based on, and who ported/modified it.</summary>
 public sealed class DisclaimerDialog : Form
 {
     private const string OriginalRepoUrl = "https://github.com/Tunguso4ka/SSfyImage";

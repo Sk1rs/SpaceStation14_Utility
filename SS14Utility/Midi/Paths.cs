@@ -4,13 +4,11 @@ namespace SS14Utility.Midi;
 
 public static class Paths
 {
-    /// <summary>%APPDATA%/Space Station 14/data — the client's user data directory.</summary>
     public static string GameData => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "Space Station 14",
         "data");
 
-    /// <summary>Where the launcher keeps downloaded engine builds, used to find the fallback soundfont.</summary>
     public static string EngineCache => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "Space Station 14",
@@ -26,9 +24,6 @@ public static class Paths
         "SS14MidiPlayer",
         "settings.json");
 
-    /// <summary>
-    ///     MIDI folders the game itself uses, so the file list is populated on first start.
-    /// </summary>
     public static IEnumerable<string> DefaultMidiFolders()
     {
         var data = GameData;
@@ -44,10 +39,6 @@ public static class Paths
             yield return music;
     }
 
-    /// <summary>
-    ///     Soundfonts in exactly the order Robust.Client's MidiManager loads them; the last one wins for
-    ///     any preset it defines. Engine fallback, OS soundfont, content soundfonts, then user soundfonts.
-    /// </summary>
     public static List<string> SoundfontLoadOrder()
     {
         var result = new List<string>();
@@ -56,7 +47,6 @@ public static class Paths
         if (File.Exists(fallback))
             result.Add(fallback);
 
-        // MidiManager: {SystemRoot}/system32/drivers/gm.dls on Windows.
         var systemRoot = Environment.GetEnvironmentVariable("SystemRoot");
         if (!string.IsNullOrEmpty(systemRoot))
         {
@@ -65,7 +55,6 @@ public static class Paths
                 result.Add(osFont);
         }
 
-        // Content soundfonts from Resources/Audio/MidiCustom, sorted like the resource manager returns them.
         if (Directory.Exists(SoundfontDir))
         {
             foreach (var file in Directory.GetFiles(SoundfontDir).OrderBy(x => x, StringComparer.Ordinal))
@@ -81,7 +70,6 @@ public static class Paths
             }
         }
 
-        // User soundfonts override everything, same as in the game.
         var userFonts = Path.Combine(GameData, "soundfonts");
         if (Directory.Exists(userFonts))
         {
@@ -97,9 +85,6 @@ public static class Paths
     }
 }
 
-/// <summary>
-///     Remembers what the user picked last time.
-/// </summary>
 public sealed class AppSettings
 {
     public string? MidiFolder { get; set; }
@@ -118,7 +103,6 @@ public sealed class AppSettings
         }
         catch
         {
-            // Corrupt settings are not worth bothering the user about.
         }
 
         return new AppSettings();
@@ -133,7 +117,6 @@ public sealed class AppSettings
         }
         catch
         {
-            // Not being able to save settings shouldn't kill the app.
         }
     }
 }

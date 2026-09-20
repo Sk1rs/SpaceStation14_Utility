@@ -2,10 +2,6 @@ using System.Drawing.Imaging;
 
 namespace SS14Utility.ImageTool;
 
-/// <summary>
-///     A plain (width, height) grid of straight-alpha RGBA colors, with fast bulk conversion to/from
-///     a <see cref="Bitmap" /> via LockBits (Bitmap.GetPixel/SetPixel is far too slow for whole-image loops).
-/// </summary>
 public sealed class PixelBuffer
 {
     public readonly int Width;
@@ -31,9 +27,6 @@ public sealed class PixelBuffer
         var h = bitmap.Height;
         var buffer = new PixelBuffer(w, h);
 
-        // Bitmap.Clone(..., format) is GDI+'s own pixel-format converter, not a draw/compositing
-        // operation - unlike Graphics.DrawImage (even with CompositingMode.SourceCopy), it doesn't
-        // round semi-transparent pixels through a premultiply/unpremultiply pass.
         var argb = bitmap.PixelFormat == PixelFormat.Format32bppArgb
             ? bitmap
             : bitmap.Clone(new Rectangle(0, 0, w, h), PixelFormat.Format32bppArgb);
@@ -49,7 +42,6 @@ public sealed class PixelBuffer
                 for (var x = 0; x < w; x++)
                 {
                     var i = row + x * 4;
-                    // BGRA byte order on little-endian Format32bppArgb.
                     buffer[x, y] = Color.FromArgb(bytes[i + 3], bytes[i + 2], bytes[i + 1], bytes[i]);
                 }
             }

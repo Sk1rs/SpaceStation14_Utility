@@ -1,9 +1,3 @@
-"""Extracts every SS14 instrument prototype (program/bank/flags/styles) into instruments.json.
-
-Mirrors how the game resolves prototypes: entity prototypes inherit components from
-their parent(s), and the Instrument component fields (program, bank, allowPercussion,
-allowProgramChange, respectMidiLimits) come from the most derived definition.
-"""
 import json
 import os
 import re
@@ -77,7 +71,6 @@ for root, _dirs, files in os.walk(PROTO_DIR):
 
 
 def lookup(pid, getter, seen=None):
-    """Walk the inheritance chain (depth-first, later parents win like RT) for a value."""
     seen = seen or set()
     if pid in seen or pid not in protos:
         return None
@@ -108,7 +101,6 @@ def comp_field(pid, comp, field):
     return lookup(pid, lambda p: p['comps'].get(comp, {}).get(field))
 
 
-# Russian entity names: ent-<Id> = <name>
 ru_names = {}
 ent_re = re.compile(r'^ent-([A-Za-z0-9_]+)\s*=\s*(.+)$')
 for root, _dirs, files in os.walk(LOCALE_DIR):
@@ -130,7 +122,6 @@ for pid, p in protos.items():
     if isinstance(swap, dict):
         styles = []
         for style_name, value in swap.items():
-            # YAML shape is `"Style": {program: bank}` (a C# tuple), sometimes a list.
             if isinstance(value, dict) and value:
                 prog, bank = next(iter(value.items()))
                 styles.append({'name': str(style_name), 'program': int(prog), 'bank': int(bank)})

@@ -11,30 +11,14 @@ public enum LimitStatus
     Stopped,
 }
 
-/// <summary>
-///     Simulates what everyone else in the round would hear.
-///
-///     The player himself always hears the file in full: his own renderer plays it locally. Other players
-///     only get what the client manages to send over the network, and that is rate limited: at most
-///     midi.max_events_per_batch (60) events per game tick and midi.max_events_per_second (1000) events per
-///     second, with the rest queueing up. Once the client keeps falling behind for midi.max_lagged_batches
-///     (8) batches the server stops relaying the music, cramps the player's fingers and stuns them.
-///
-///     Turning this on routes playback through the same queue, so a MIDI that is too dense for the game
-///     sounds here the way it would sound in the round.
-/// </summary>
 public sealed class GameLimitSimulator
 {
-    /// <summary>net.tickrate</summary>
     public const int TickRate = 30;
 
-    /// <summary>midi.max_events_per_batch</summary>
     public int MaxEventsPerBatch { get; set; } = 60;
 
-    /// <summary>midi.max_events_per_second</summary>
     public int MaxEventsPerSecond { get; set; } = 1000;
 
-    /// <summary>midi.max_lagged_batches</summary>
     public int MaxLaggedBatches { get; set; } = 8;
 
     private readonly Ss14MidiEngine _engine;
@@ -56,10 +40,8 @@ public sealed class GameLimitSimulator
         _timer = new System.Threading.Timer(_ => Tick(), null, 1000 / TickRate, 1000 / TickRate);
     }
 
-    /// <summary>Fired once when the server would have cut the music off and stunned the player.</summary>
     public event Action? Cramped;
 
-    /// <summary>Whether playback goes through the network rate limit.</summary>
     public bool Enabled
     {
         get => _enabled;
@@ -73,21 +55,14 @@ public sealed class GameLimitSimulator
         }
     }
 
-    /// <summary>
-    ///     Whether the music actually goes silent once the limits are blown, like the server cutting it off,
-    ///     or whether it keeps playing (delayed) and only reports the problem.
-    /// </summary>
     public bool StopWhenCramped { get; set; } = true;
 
-    /// <summary>Instrument's respectMidiLimits: admin instruments ignore the limits entirely.</summary>
     public bool RespectMidiLimits { get; set; } = true;
 
     public LimitStatus Status { get; private set; } = LimitStatus.Idle;
 
-    /// <summary>Events the file produced during the last second.</summary>
     public int EventsPerSecond { get; private set; }
 
-    /// <summary>Events that actually made it through during the last second.</summary>
     public int SentPerSecond { get; private set; }
 
     public int QueueLength
@@ -101,7 +76,6 @@ public sealed class GameLimitSimulator
 
     public int LaggedBatches => _laggedBatches;
 
-    /// <summary>Roughly how far behind the other players' audio is, in milliseconds.</summary>
     public int DelayMs
     {
         get
@@ -138,10 +112,6 @@ public sealed class GameLimitSimulator
         }
     }
 
-    /// <summary>
-    ///     One game tick worth of relaying, mirroring InstrumentSystem.Update on the client and
-    ///     OnMidiEventRx on the server.
-    /// </summary>
     public void Tick()
     {
         if (!_enabled)
@@ -149,7 +119,6 @@ public sealed class GameLimitSimulator
 
         RotateSecondCounters();
 
-        // The server has cleaned the instrument up: nothing reaches the listeners any more.
         if (Status == LimitStatus.Stopped)
         {
             lock (_lock)
@@ -158,7 +127,6 @@ public sealed class GameLimitSimulator
             return;
         }
 
-        // Admin instruments (respectMidiLimits: false) send everything, no matter how much it is.
         if (!RespectMidiLimits)
         {
             DrainAll();
@@ -185,7 +153,6 @@ public sealed class GameLimitSimulator
 
             if (max <= 0)
             {
-                // Hit the per-second limit: this whole tick is lost time for the listeners.
                 _laggedBatches++;
                 Status = LimitStatus.Lagging;
                 CheckCramps();
@@ -210,7 +177,6 @@ public sealed class GameLimitSimulator
 
         if (remaining > 0)
         {
-            // Still behind after a full batch, that is exactly what makes the server call it lag.
             _laggedBatches++;
             Status = LimitStatus.Lagging;
             CheckCramps();
@@ -255,7 +221,6 @@ public sealed class GameLimitSimulator
 
     private void CheckCramps()
     {
-        // Two thirds of the way to the limit is where the game starts warning the player.
         if (_laggedBatches >= (int) (MaxLaggedBatches * (2 / 3d) + 1))
             Status = LimitStatus.Cramping;
 

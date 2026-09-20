@@ -1,4 +1,3 @@
-"""Extracts the 128 GM program names (en/ru) exactly as the game labels MIDI channels."""
 import json
 import os
 import re
