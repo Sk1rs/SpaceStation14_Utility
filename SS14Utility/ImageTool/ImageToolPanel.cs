@@ -1,16 +1,11 @@
 using System.Drawing.Imaging;
+using static SS14Utility.UiKit;
 
 namespace SS14Utility.ImageTool;
 
 /// <summary>Main UI for the image-to-SS14-text converter - ported from main.py's Window class.</summary>
 public sealed class ImageToolPanel : UserControl
 {
-    private static readonly Color BgColor = Color.FromArgb(28, 30, 36);
-    private static readonly Color FgColor = Color.FromArgb(224, 226, 232);
-    private static readonly Color MutedColor = Color.FromArgb(150, 155, 168);
-    private static readonly Color InputColor = Color.FromArgb(24, 26, 31);
-    private static readonly Color BadColor = Color.FromArgb(214, 92, 92);
-
     private const string UsefulVideoUrl = "https://youtu.be/9FCF2Y4lIWk?si=LEDw75eOhhTPN_Ua";
 
     private static readonly string[] SymbolPresets =
@@ -40,6 +35,8 @@ public sealed class ImageToolPanel : UserControl
     private ComboBox _comboPreset = null!, _comboStyle = null!;
     private PictureBox _previewBox = null!;
     private Label _previewPlaceholder = null!;
+    private Control[] _stackedGroups = Array.Empty<Control>();
+    private Control _content = null!;
 
     public ImageToolPanel()
     {
@@ -84,15 +81,32 @@ public sealed class ImageToolPanel : UserControl
             BuildAdjustGroup(),
             BuildSourceGroup(),
         };
+        _stackedGroups = groupsBottomToTop;
 
-        _lblInfo = new Label { Dock = DockStyle.Bottom, Height = 26, TextAlign = ContentAlignment.MiddleCenter, Text = "Изображение не загружено" };
+        _lblInfo = new Label { Height = 26, TextAlign = ContentAlignment.MiddleCenter, Text = "Изображение не загружено" };
 
-        var content = BuildContent();
+        // Dock.Fill on `_content` would depend on WinForms re-running this panel's Fill calculation
+        // every time a group box above it changes height via AttachAutoHeight - which, empirically,
+        // it does not reliably do (Fill ends up sized against a stale pre-resize snapshot of the
+        // groups, overlapping them). Positioning both manually below sidesteps that entirely.
+        _content = BuildContent();
+        _content.Dock = DockStyle.None;
 
         foreach (var g in groupsBottomToTop)
             Controls.Add(g);
         Controls.Add(_lblInfo);
-        Controls.Add(content); // Fill - added last so it claims whatever space the Top/Bottom groups left
+        Controls.Add(_content);
+
+        Layout += (_, _) => RepositionContent();
+        RepositionContent();
+    }
+
+    private void RepositionContent()
+    {
+        var top = _stackedGroups.Length == 0 ? 0 : _stackedGroups.Max(g => g.Bottom);
+        const int infoHeight = 26;
+        _lblInfo.SetBounds(0, Math.Max(top, ClientSize.Height - infoHeight), ClientSize.Width, infoHeight);
+        _content.SetBounds(0, top, ClientSize.Width, Math.Max(0, _lblInfo.Top - top));
     }
 
     private Control BuildSourceGroup()
@@ -325,93 +339,9 @@ public sealed class ImageToolPanel : UserControl
         return split;
     }
 
-    // Dock.Top gives the box the parent's full width while AutoSize/GrowAndShrink lets its height
-    // follow however tall its content (a wrapping FlowLayoutPanel) turns out to be at that width -
-    // fixed pixel heights can't predict how many rows the buttons wrap to at different window sizes.
-    private static GroupBox MakeGroup(string title) => new()
-    {
-        Text = title,
-        Dock = DockStyle.Top,
-        ForeColor = FgColor,
-        Padding = new Padding(6, 4, 6, 8),
-    };
-
-    private static FlowLayoutPanel MakeFlow() => new()
-    {
-        Dock = DockStyle.Top,
-        FlowDirection = FlowDirection.LeftToRight,
-        WrapContents = true,
-    };
-
-    /// <summary>
-    ///     Keeps `box` tall enough for `flow`'s wrapped content. GroupBox.AutoSize measuring a Dock.Top
-    ///     FlowLayoutPanel child looks right at first glance but under-measures once the box's actual
-    ///     width (only known after Dock.Top stretches it) causes an extra wrap row, so height is instead
-    ///     tracked explicitly from the flow panel's own (width-dependent) preferred size.
-    /// </summary>
-    private static void AttachAutoHeight(GroupBox box, FlowLayoutPanel flow)
-    {
-        void Sync()
-        {
-            // The parameterless PreferredSize ignores flow's actual current width, so a wrapping
-            // FlowLayoutPanel always measures itself as if everything fit on one (very wide) row.
-            // GetPreferredSize(width, 0) constrains the measurement to the real width so wrapped
-            // rows are actually counted - 0 in the height slot means "unconstrained".
-            if (flow.Width <= 0) return;
-            var flowHeight = flow.GetPreferredSize(new Size(flow.Width, 0)).Height;
-            if (flow.Height != flowHeight) flow.Height = flowHeight;
-            box.Height = flowHeight + box.Padding.Top + box.Padding.Bottom;
-        }
-        flow.Layout += (_, _) => Sync();
-        box.Layout += (_, _) => Sync();
-        Sync();
-    }
-
-    private Button MakeButton(string text, EventHandler onClick)
-    {
-        var b = new Button { Text = text, AutoSize = true, Margin = new Padding(3) };
-        StyleButton(b);
-        b.Click += onClick;
-        return b;
-    }
-
-    private static void StyleButton(Button b)
-    {
-        b.FlatStyle = FlatStyle.Flat;
-        b.BackColor = Color.FromArgb(52, 56, 66);
-        b.ForeColor = FgColor;
-        b.FlatAppearance.BorderColor = Color.FromArgb(70, 76, 90);
-        b.UseVisualStyleBackColor = false;
-    }
-
-    private CheckBox MakeCheck(string text) => new() { Text = text, AutoSize = true, ForeColor = FgColor, Margin = new Padding(3, 8, 3, 3) };
-
-    private static Label MakeLabel(string text) => new() { Text = text, AutoSize = true, ForeColor = FgColor, Padding = new Padding(3, 8, 0, 0) };
-
-    private static TrackBar MakeSlider(int min, int max, int value) => new() { Minimum = min, Maximum = max, Value = value, Width = 100, TickStyle = TickStyle.None, Margin = new Padding(3) };
-
-    private static NumericUpDown MakeNumeric(int min, int max, int value)
-    {
-        var n = new NumericUpDown { Minimum = min, Maximum = max, Value = value, Width = 55, Margin = new Padding(3, 6, 3, 3) };
-        n.BackColor = InputColor;
-        n.ForeColor = FgColor;
-        n.BorderStyle = BorderStyle.FixedSingle;
-        return n;
-    }
-
-    private static void StyleInput(TextBox box)
-    {
-        box.BackColor = InputColor;
-        box.ForeColor = FgColor;
-        box.BorderStyle = BorderStyle.FixedSingle;
-    }
-
-    private static void StyleCombo(ComboBox box)
-    {
-        box.BackColor = InputColor;
-        box.ForeColor = FgColor;
-        box.FlatStyle = FlatStyle.Flat;
-    }
+    // Shared layout helpers (MakeGroup, MakeFlow, AttachAutoHeight, MakeButton, MakeCheck, MakeLabel,
+    // MakeSlider, MakeNumeric, StyleInput, StyleCombo, color constants) now live in UiKit - see the
+    // `using static` above.
 
     #endregion
 

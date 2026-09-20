@@ -1,3 +1,4 @@
+using SS14Utility.CharacterCard;
 using SS14Utility.ImageTool;
 using SS14Utility.Midi;
 
@@ -8,6 +9,7 @@ public sealed class AppMainForm : Form
 {
     private readonly MidiPlayerPanel _midiPanel = new();
     private readonly ImageToolPanel _imagePanel = new();
+    private readonly CharacterCardPanel _cardPanel = new();
 
     public AppMainForm()
     {
@@ -26,6 +28,10 @@ public sealed class AppMainForm : Form
         var imageTab = new TabPage("Картинка → текст");
         imageTab.Controls.Add(_imagePanel);
         tabs.TabPages.Add(imageTab);
+
+        var cardTab = new TabPage("Карточка персонажа");
+        cardTab.Controls.Add(_cardPanel);
+        tabs.TabPages.Add(cardTab);
 
         Controls.Add(tabs);
 
