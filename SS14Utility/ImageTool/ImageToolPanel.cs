@@ -70,28 +70,29 @@ public sealed class ImageToolPanel : UserControl
 
     private void BuildUi()
     {
-        var root = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 8 };
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 78));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 46));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 46));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 46));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 46));
-        root.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 26));
+        // Each group box auto-sizes its own height to fit however many rows its buttons wrap to
+        // (fixed pixel row heights can't predict that), so everything is stacked with Dock instead
+        // of a TableLayoutPanel. For same-edge Dock.Top controls, WinForms docks the LAST-added one
+        // outermost (topmost) - so to get Source at the very top down to Output just above the
+        // content area, they're added in reverse of that visual order.
+        var groupsBottomToTop = new[]
+        {
+            BuildOutputGroup(),
+            BuildSizeGroup(),
+            BuildSymbolGroup(),
+            BuildRecolorGroup(),
+            BuildAdjustGroup(),
+            BuildSourceGroup(),
+        };
 
-        root.Controls.Add(BuildSourceGroup(), 0, 0);
-        root.Controls.Add(BuildAdjustGroup(), 0, 1);
-        root.Controls.Add(BuildRecolorGroup(), 0, 2);
-        root.Controls.Add(BuildSymbolGroup(), 0, 3);
-        root.Controls.Add(BuildSizeGroup(), 0, 4);
-        root.Controls.Add(BuildOutputGroup(), 0, 5);
-        root.Controls.Add(BuildContent(), 0, 6);
+        _lblInfo = new Label { Dock = DockStyle.Bottom, Height = 26, TextAlign = ContentAlignment.MiddleCenter, Text = "Изображение не загружено" };
 
-        _lblInfo = new Label { Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter, Text = "Изображение не загружено" };
-        root.Controls.Add(_lblInfo, 0, 7);
+        var content = BuildContent();
 
-        Controls.Add(root);
+        foreach (var g in groupsBottomToTop)
+            Controls.Add(g);
+        Controls.Add(_lblInfo);
+        Controls.Add(content); // Fill - added last so it claims whatever space the Top/Bottom groups left
     }
 
     private Control BuildSourceGroup()
@@ -103,6 +104,7 @@ public sealed class ImageToolPanel : UserControl
         flow.Controls.Add(MakeButton("Вставить (Ctrl+V)", (_, _) => OnPaste()));
         flow.Controls.Add(MakeButton("Рисовать", (_, _) => OnDraw()));
         box.Controls.Add(flow);
+        AttachAutoHeight(box, flow);
         return box;
     }
 
@@ -156,6 +158,7 @@ public sealed class ImageToolPanel : UserControl
         flow.Controls.Add(MakeButton("Сброс", (_, _) => OnResetAdjust()));
 
         box.Controls.Add(flow);
+        AttachAutoHeight(box, flow);
         return box;
     }
 
@@ -181,6 +184,7 @@ public sealed class ImageToolPanel : UserControl
         flow.Controls.Add(_lblRecolorCount);
 
         box.Controls.Add(flow);
+        AttachAutoHeight(box, flow);
         return box;
     }
 
@@ -223,6 +227,7 @@ public sealed class ImageToolPanel : UserControl
         flow.Controls.Add(_chkShading);
 
         box.Controls.Add(flow);
+        AttachAutoHeight(box, flow);
         return box;
     }
 
@@ -256,6 +261,7 @@ public sealed class ImageToolPanel : UserControl
         flow.Controls.Add(MakeButton("Сброс размера", (_, _) => OnResetSize()));
 
         box.Controls.Add(flow);
+        AttachAutoHeight(box, flow);
         return box;
     }
 
@@ -279,6 +285,7 @@ public sealed class ImageToolPanel : UserControl
         flow.Controls.Add(MakeButton("Полезное видео", (_, _) => OnVideo()));
 
         box.Controls.Add(flow);
+        AttachAutoHeight(box, flow);
         return box;
     }
 
@@ -318,9 +325,47 @@ public sealed class ImageToolPanel : UserControl
         return split;
     }
 
-    private static GroupBox MakeGroup(string title) => new() { Text = title, Dock = DockStyle.Fill, ForeColor = FgColor };
+    // Dock.Top gives the box the parent's full width while AutoSize/GrowAndShrink lets its height
+    // follow however tall its content (a wrapping FlowLayoutPanel) turns out to be at that width -
+    // fixed pixel heights can't predict how many rows the buttons wrap to at different window sizes.
+    private static GroupBox MakeGroup(string title) => new()
+    {
+        Text = title,
+        Dock = DockStyle.Top,
+        ForeColor = FgColor,
+        Padding = new Padding(6, 4, 6, 8),
+    };
 
-    private static FlowLayoutPanel MakeFlow() => new() { Dock = DockStyle.Fill, FlowDirection = FlowDirection.LeftToRight, WrapContents = true, AutoScroll = false };
+    private static FlowLayoutPanel MakeFlow() => new()
+    {
+        Dock = DockStyle.Top,
+        FlowDirection = FlowDirection.LeftToRight,
+        WrapContents = true,
+    };
+
+    /// <summary>
+    ///     Keeps `box` tall enough for `flow`'s wrapped content. GroupBox.AutoSize measuring a Dock.Top
+    ///     FlowLayoutPanel child looks right at first glance but under-measures once the box's actual
+    ///     width (only known after Dock.Top stretches it) causes an extra wrap row, so height is instead
+    ///     tracked explicitly from the flow panel's own (width-dependent) preferred size.
+    /// </summary>
+    private static void AttachAutoHeight(GroupBox box, FlowLayoutPanel flow)
+    {
+        void Sync()
+        {
+            // The parameterless PreferredSize ignores flow's actual current width, so a wrapping
+            // FlowLayoutPanel always measures itself as if everything fit on one (very wide) row.
+            // GetPreferredSize(width, 0) constrains the measurement to the real width so wrapped
+            // rows are actually counted - 0 in the height slot means "unconstrained".
+            if (flow.Width <= 0) return;
+            var flowHeight = flow.GetPreferredSize(new Size(flow.Width, 0)).Height;
+            if (flow.Height != flowHeight) flow.Height = flowHeight;
+            box.Height = flowHeight + box.Padding.Top + box.Padding.Bottom;
+        }
+        flow.Layout += (_, _) => Sync();
+        box.Layout += (_, _) => Sync();
+        Sync();
+    }
 
     private Button MakeButton(string text, EventHandler onClick)
     {
